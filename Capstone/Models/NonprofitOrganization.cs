@@ -23,12 +23,18 @@ namespace Capstone.Models
         public Address ShipAddress { get; set; }
 
         [ForeignKey("DropAddress")]
+        [Display(Name = "Drop-off Address")]
         public int DropOffAddress { get; set; }
         public Address DropAddress { get; set; }
 
-        [StringLength(200, ErrorMessage = "Descriptions have a maximum of 100 characters.")]
+        [StringLength(250, ErrorMessage = "Descriptions have a maximum of 250 characters.")]
         public string OrganizationDescription { get; set; }
 
+        [Display(Name = "Website")]
+        public string OrganizationWebsite { get; set; }
+
+        [Display(Name = "Phone")]
+        public int OrganizationPhone { get; set; }
 
 
 

@@ -200,6 +200,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808150000551_Added to Org model.cs" />
+    <Compile Include="Migrations\201808150000551_Added to Org model.Designer.cs">
+      <DependentUpon>201808150000551_Added to Org model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808150045532_adding userRoles.cs" />
+    <Compile Include="Migrations\201808150045532_adding userRoles.Designer.cs">
+      <DependentUpon>201808150045532_adding userRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808150126315_Adding to IdentityModel.cs" />
+    <Compile Include="Migrations\201808150126315_Adding to IdentityModel.Designer.cs">
+      <DependentUpon>201808150126315_Adding to IdentityModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808150152342_added to vms.cs" />
+    <Compile Include="Migrations\201808150152342_added to vms.Designer.cs">
+      <DependentUpon>201808150152342_added to vms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -214,6 +231,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\united.bootstrap.css" />
+    <Content Include="Content\united.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -255,7 +274,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterSupporter.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -268,6 +287,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\RegisterOrganization.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -284,6 +304,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808150000551_Added to Org model.resx">
+      <DependentUpon>201808150000551_Added to Org model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808150045532_adding userRoles.resx">
+      <DependentUpon>201808150045532_adding userRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808150126315_Adding to IdentityModel.resx">
+      <DependentUpon>201808150126315_Adding to IdentityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808150152342_added to vms.resx">
+      <DependentUpon>201808150152342_added to vms.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
