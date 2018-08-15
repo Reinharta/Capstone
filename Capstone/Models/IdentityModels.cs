@@ -35,6 +35,11 @@ namespace Capstone.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<NonprofitOrganization> NonprofitOrganizations { get; set; }
+        public DbSet<Supporter> Supporters { get; set; }
+        
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -44,5 +49,6 @@ namespace Capstone.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

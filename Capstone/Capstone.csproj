@@ -195,8 +195,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NonprofitOrganizationsController.cs" />
+    <Compile Include="Controllers\SupportersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
     <Compile Include="Migrations\201808150152342_added to vms.cs" />
     <Compile Include="Migrations\201808150152342_added to vms.Designer.cs">
       <DependentUpon>201808150152342_added to vms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808152310441_adding DBSets.cs" />
+    <Compile Include="Migrations\201808152310441_adding DBSets.Designer.cs">
+      <DependentUpon>201808152310441_adding DBSets.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -288,6 +295,21 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\RegisterOrganization.cshtml" />
+    <Content Include="Views\NonprofitOrganizations\Create.cshtml" />
+    <Content Include="Views\NonprofitOrganizations\Delete.cshtml" />
+    <Content Include="Views\NonprofitOrganizations\Details.cshtml" />
+    <Content Include="Views\NonprofitOrganizations\Edit.cshtml" />
+    <Content Include="Views\NonprofitOrganizations\Index.cshtml" />
+    <Content Include="Views\Supporters\Create.cshtml" />
+    <Content Include="Views\Supporters\Delete.cshtml" />
+    <Content Include="Views\Supporters\Details.cshtml" />
+    <Content Include="Views\Supporters\Edit.cshtml" />
+    <Content Include="Views\Supporters\Index.cshtml" />
+    <Content Include="Views\Addresses\Create.cshtml" />
+    <Content Include="Views\Addresses\Delete.cshtml" />
+    <Content Include="Views\Addresses\Details.cshtml" />
+    <Content Include="Views\Addresses\Edit.cshtml" />
+    <Content Include="Views\Addresses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808150152342_added to vms.resx">
       <DependentUpon>201808150152342_added to vms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808152310441_adding DBSets.resx">
+      <DependentUpon>201808152310441_adding DBSets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

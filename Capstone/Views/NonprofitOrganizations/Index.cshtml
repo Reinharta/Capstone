@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Capstone.Models.NonprofitOrganization>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DropAddress.ContactPerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipAddress.ContactPerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationWebsite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationPhone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DropAddress.ContactPerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipAddress.ContactPerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationWebsite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationPhone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrganizationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrganizationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrganizationId })
+        </td>
+    </tr>
+}
+
+</table>
