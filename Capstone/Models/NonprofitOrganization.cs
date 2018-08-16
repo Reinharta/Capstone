@@ -12,6 +12,8 @@ namespace Capstone.Models
         [Key]
         public int OrganizationId { get; set; }
 
+        public string UserId { get; set; }
+
         public bool Active { get; set; }
 
         [Display(Name = "Name")]

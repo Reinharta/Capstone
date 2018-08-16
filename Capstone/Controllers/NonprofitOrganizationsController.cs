@@ -36,6 +36,18 @@ namespace Capstone.Controllers
             return View(nonprofitOrganization);
         }
 
+        public ActionResult PreCreate(ApplicationUser user)
+        {
+            var organization = new NonprofitOrganization()
+            {
+                OrganizationName = user.OrganizationName,
+                UserId = user.Id,
+            };
+            db.NonprofitOrganizations.Add(organization);
+            db.SaveChanges();
+            return View("RegistrationLanding");
+        }
+
         // GET: NonprofitOrganizations/Create
         public ActionResult Create()
         {
