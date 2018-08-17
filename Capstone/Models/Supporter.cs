@@ -18,7 +18,7 @@ namespace Capstone.Models
         public string Email { get; set; }
 
         [ForeignKey ("Address")]
-        public int SupporterAddress { get; set; }
+        public int? SupporterAddress { get; set; }
         public Address Address { get; set; }
     }
 }

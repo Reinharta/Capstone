@@ -4,7 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>We've Received Your Submission!</h2>
+<h1 class="text-center" style="color:darkgreen">We've Received Your Submission!</h1>
+<br/>
+<div class="jumbotron">
+    <h2 style="color:darkolivegreen">BUT WAIT! There's more...</h2>
 
-<h3>BUT WAIT! There's more...</h3>
-
+    <h3 style="color:darkolivegreen">We need to confirm your organization's Nonprofit status before we can activate your account.</h3>
+    <br />
+    <div class="col-lg-12">Please send any documents pertinent to your current Nonprofit Status to one of the addresses below at your soonest convenience.</div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="col-sm-4">
+        Application Name<br/>
+        Street address<br/>
+        city state zip
+    </div>
+    <div class="col-sm-4">
+        Application@email.com
+    </div>
+    <p><a class="col-sm-4 btn-primary btn-lg text-center" href="@Url.Action("Index", "Home")">Back Home</a></p>
+    <br/>
+    <br/>
+</div>

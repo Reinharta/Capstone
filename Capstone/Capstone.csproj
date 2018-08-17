@@ -223,6 +223,14 @@
     <Compile Include="Migrations\201808152310441_adding DBSets.Designer.cs">
       <DependentUpon>201808152310441_adding DBSets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808162306344_updating.cs" />
+    <Compile Include="Migrations\201808162306344_updating.Designer.cs">
+      <DependentUpon>201808162306344_updating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808162327595_made address FKs nullable.cs" />
+    <Compile Include="Migrations\201808162327595_made address FKs nullable.Designer.cs">
+      <DependentUpon>201808162327595_made address FKs nullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -343,6 +351,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808152310441_adding DBSets.resx">
       <DependentUpon>201808152310441_adding DBSets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162306344_updating.resx">
+      <DependentUpon>201808162306344_updating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808162327595_made address FKs nullable.resx">
+      <DependentUpon>201808162327595_made address FKs nullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

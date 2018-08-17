@@ -42,6 +42,9 @@ namespace Capstone.Controllers
             {
                 OrganizationName = user.OrganizationName,
                 UserId = user.Id,
+                Active = false,
+                ShipAddress = null,
+                DropAddress = null
             };
             db.NonprofitOrganizations.Add(organization);
             db.SaveChanges();
