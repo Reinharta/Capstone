@@ -14,6 +14,11 @@ namespace Capstone.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Dashboard(NonprofitOrganization organization)
+        {
+            return View("OrgDashboard", organization);
+        }
+
         // GET: NonprofitOrganizations
         public ActionResult Index()
         {

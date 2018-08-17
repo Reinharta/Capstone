@@ -65,6 +65,10 @@ namespace Capstone.Models
     public class RegisterOrganizationViewModel
     {
         [Required]
+        [Display(Name = "Account Type:")]
+        public string UserRole { get; set; }
+
+        [Required]
         [Display(Name ="Organization Name")]
         public string OrganizationName { get; set; }
 
@@ -87,6 +91,10 @@ namespace Capstone.Models
 
     public class RegisterSupporterViewModel
     {
+        [Required]
+        [Display(Name = "Account Type:")]
+        public string UserRole { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string SupporterFirstName { get; set; }

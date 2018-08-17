@@ -319,6 +319,7 @@
     <Content Include="Views\Addresses\Edit.cshtml" />
     <Content Include="Views\Addresses\Index.cshtml" />
     <Content Include="Views\NonprofitOrganizations\RegistrationLanding.cshtml" />
+    <Content Include="Views\NonprofitOrganizations\OrgDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

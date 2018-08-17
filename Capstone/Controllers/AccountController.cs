@@ -77,9 +77,19 @@ namespace Capstone.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
-            {
+            {              
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    ApplicationDbContext db = new ApplicationDbContext();
+                    ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
+                    if ((UserManager.IsInRole(user.Id, "Organization")))
+                    {
+                        NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.UserId == user.Id).First();
+                        return RedirectToAction("Dashboard", "NonprofitOrganizations", organization);
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -151,7 +161,9 @@ namespace Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, OrganizationName = model.OrganizationName };
+                
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, OrganizationName = model.OrganizationName, UserRole = "Organization"};
+
                 var result = await UserManager.CreateAsync(user, model.Password);              
                 if (result.Succeeded)
                 {
@@ -162,7 +174,7 @@ namespace Capstone.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
                     return RedirectToAction("PreCreate", "NonprofitOrganizations", user);
                 }
                 AddErrors(result);
@@ -188,7 +200,7 @@ namespace Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, SupporterFirstName = model.SupporterFirstName, SupporterLastName = model.SupporterLastName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, SupporterFirstName = model.SupporterFirstName, SupporterLastName = model.SupporterLastName, UserRole = "Supporter" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
