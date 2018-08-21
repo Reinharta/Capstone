@@ -1,33 +1,76 @@
 ﻿@model Capstone.Models.NonprofitOrganization
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "OrgDashboard";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "OrgDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>OrgDashboard</h2>
+<h2>Dashboard</h2>
 @if (Model.Active == false)
 {
-<div class="jumbotron">
-    <h1>Inactive Account</h1>
-    <br />
-    <div class="col-lg-12">Bummer! Your account isn't active yet. Make sure you've submitted your documents and check back frequently!</div>
-    <br />
-    <br />
-    Need to submit your documents? Send them our way!
-    <br />
-    <div class="col-sm-4">
-        Application Name<br />
-        Street address<br />
-        city state zip
+    <div class="jumbotron">
+        <h1>Inactive Account</h1>
+        <br />
+        <div class="col-lg-12">Bummer! Your account isn't active yet. Make sure you've submitted your documents and check back frequently!</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        Need to submit your documents? Send them our way!
+        <br />
+        <br />
+        <div class="col-sm-4">
+            Application Name<br />
+            Street address<br />
+            city state zip
+        </div>
+        <div class="col-sm-4">
+            Application@email.com
+        </div>
+        <p><a class="col-sm-4 btn-primary btn-lg text-center" href="@Url.Action("Index", "Home")">Back Home</a></p>
+        <br />
+        <br />
     </div>
-    <div class="col-sm-4">
-        Application@email.com
-    </div>
-    <p><a class="col-sm-4 btn-primary btn-lg text-center" href="@Url.Action("Index", "Home")">Back Home</a></p>
-    <br />
-    <br />
-    <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-</div>
 }
+@if (Model.Active == true)
+{
+
+}
+    <hr />
+<div>
+    <h4>Contact Information</h4>
+    <h5>@Model.OrganizationName</h5>
+    @if (Model.OrganizationPhone != 0)
+    {
+        @Html.DisplayFor(m => m.OrganizationPhone)
+    }
+    @if (Model.OrganizationPhone == 0)
+    {
+        <h6>No Phone Number Saved</h6>
+    }
+    @Html.DisplayFor(m => m.User.Email)
+    <br />
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
+    @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+</div>
+<hr />
+<div>
+    <h4>Address Book</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Shipping Address:</h5>
+            @Html.DisplayFor(m => m.ShipAddress.StreetAddress)<br />
+            @Html.DisplayFor(m => m.ShipAddress.City),
+        </div>
+        <div class="col-sm-6">
+            <h5>Drop-Off Address:</h5>
+            123 Drop Off St.<br />
+            City, State Zip
+        </div>
+        <br />
+        @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
+        @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+    </div>
+</div>
+

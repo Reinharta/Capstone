@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201808162327595_made address FKs nullable.Designer.cs">
       <DependentUpon>201808162327595_made address FKs nullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808210355382_adding user prop in NP.cs" />
+    <Compile Include="Migrations\201808210355382_adding user prop in NP.Designer.cs">
+      <DependentUpon>201808210355382_adding user prop in NP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -358,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808162327595_made address FKs nullable.resx">
       <DependentUpon>201808162327595_made address FKs nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808210355382_adding user prop in NP.resx">
+      <DependentUpon>201808210355382_adding user prop in NP.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

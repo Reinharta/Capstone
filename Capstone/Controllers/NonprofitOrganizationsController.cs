@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Capstone.Controllers
 {
@@ -16,6 +17,11 @@ namespace Capstone.Controllers
 
         public ActionResult Dashboard(NonprofitOrganization organization)
         {
+            if(organization == null)
+            {
+                ApplicationUser user = db.Users.Where(c => c.Id == User.Identity.GetUserId()).First();
+                organization = db.NonprofitOrganizations.Where(c => c.UserId == user.Id).First();
+            }
             return View("OrgDashboard", organization);
         }
 
@@ -47,6 +53,7 @@ namespace Capstone.Controllers
             {
                 OrganizationName = user.OrganizationName,
                 UserId = user.Id,
+                User = user,
                 Active = false,
                 ShipAddress = null,
                 DropAddress = null

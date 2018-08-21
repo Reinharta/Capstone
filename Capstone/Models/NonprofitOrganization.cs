@@ -13,6 +13,7 @@ namespace Capstone.Models
         public int OrganizationId { get; set; }
 
         public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
 
         public bool Active { get; set; }
 
