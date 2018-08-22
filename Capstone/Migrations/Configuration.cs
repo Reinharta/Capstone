@@ -1,5 +1,8 @@
 namespace Capstone.Migrations
 {
+    using Capstone.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,6 +17,24 @@ namespace Capstone.Migrations
 
         protected override void Seed(Capstone.Models.ApplicationDbContext context)
         {
+            ////ADDING ADMIN HERE//
+            //if (!(context.Users.Any(u => u.UserName == "admin@email.com")))
+            //{
+            //    var userStore = new UserStore<ApplicationUser>(context);
+            //    var userManager = new UserManager<ApplicationUser>(userStore);
+            //    var userToInsert = new ApplicationUser { UserName = "admin@email.com", PhoneNumber = "12345678911", Email = "admin@email.com", UserRole = "Admin" };
+            //    userManager.Create(userToInsert, "Password1!");
+            //    userManager.AddToRole(userToInsert.Id, userToInsert.UserRole);
+            //}
+
+
+
+
+
+
+
+
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

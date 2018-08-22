@@ -86,6 +86,10 @@ namespace Capstone.Controllers
                         NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.UserId == user.Id).First();
                         return RedirectToAction("Dashboard", "NonprofitOrganizations", organization);
                     }
+                    if ((UserManager.IsInRole(user.Id, "Admin")))
+                    {
+                        return RedirectToAction("Dashboard", "Admin", user);
+                    }
                     else
                     {
                         return RedirectToLocal(returnUrl);
