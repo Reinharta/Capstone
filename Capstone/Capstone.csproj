@@ -240,6 +240,10 @@
     <Compile Include="Migrations\201808220010553_added registrationCompleted prop to NP.Designer.cs">
       <DependentUpon>201808220010553_added registrationCompleted prop to NP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808221932510_testing.cs" />
+    <Compile Include="Migrations\201808221932510_testing.Designer.cs">
+      <DependentUpon>201808221932510_testing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -329,6 +333,7 @@
     <Content Include="Views\NonprofitOrganizations\RegistrationLanding.cshtml" />
     <Content Include="Views\NonprofitOrganizations\OrgDashboard.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
+    <Content Include="Views\Admin\PendingAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -373,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808220010553_added registrationCompleted prop to NP.resx">
       <DependentUpon>201808220010553_added registrationCompleted prop to NP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808221932510_testing.resx">
+      <DependentUpon>201808221932510_testing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Capstone.Models.NonprofitOrganization>
+@{
+    ViewBag.Title = "PendingAccounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Accounts Pending Authorization</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </th>
+        <th>
+            Account Status
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationPhone)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationName)
+            </td>
+                @if(item.Active == true)
+                {
+                    <td>Active</td>
+                }
+                @if(item.Active == false)
+                {
+                    <td>Inactive</td>
+                }
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationPhone)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.AddressId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AddressId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AddressId })*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+

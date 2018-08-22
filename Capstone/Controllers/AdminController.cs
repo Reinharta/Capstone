@@ -19,5 +19,12 @@ namespace Capstone.Controllers
         {
             return View("AdminDashboard", user);
         }
+
+        public ActionResult GetPendingAccounts()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            List<NonprofitOrganization> pendingList = db.NonprofitOrganizations.Where(c => c.Active == false).ToList();
+            return View("PendingAccounts", pendingList);
+        }
     }
 }
