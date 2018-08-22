@@ -55,6 +55,7 @@ namespace Capstone.Controllers
                 UserId = user.Id,
                 User = user,
                 Active = false,
+                RegistrationCompleted = false,
                 ShipAddress = null,
                 DropAddress = null
             };

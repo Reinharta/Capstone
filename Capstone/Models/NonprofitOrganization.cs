@@ -16,6 +16,7 @@ namespace Capstone.Models
         public ApplicationUser User { get; set; }
 
         public bool Active { get; set; }
+        public bool RegistrationCompleted { get; set; }
 
         [Display(Name = "Name")]
         public string OrganizationName { get; set; }

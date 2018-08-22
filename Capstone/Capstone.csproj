@@ -235,6 +235,10 @@
     <Compile Include="Migrations\201808210355382_adding user prop in NP.Designer.cs">
       <DependentUpon>201808210355382_adding user prop in NP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808220010553_added registrationCompleted prop to NP.cs" />
+    <Compile Include="Migrations\201808220010553_added registrationCompleted prop to NP.Designer.cs">
+      <DependentUpon>201808220010553_added registrationCompleted prop to NP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -246,12 +250,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-mintyTheme.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\united.bootstrap.css" />
-    <Content Include="Content\united.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -365,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808210355382_adding user prop in NP.resx">
       <DependentUpon>201808210355382_adding user prop in NP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808220010553_added registrationCompleted prop to NP.resx">
+      <DependentUpon>201808220010553_added registrationCompleted prop to NP.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

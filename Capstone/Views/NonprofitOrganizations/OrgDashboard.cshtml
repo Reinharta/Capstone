@@ -10,44 +10,77 @@
 @if (Model.Active == false)
 {
     <div class="jumbotron">
-        <h1>Inactive Account</h1>
+        <h1 class="display-3">Inactive Account</h1>
         <br />
-        <div class="col-lg-12">Bummer! Your account isn't active yet. Make sure you've submitted your documents and check back frequently!</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        Need to submit your documents? Send them our way!
-        <br />
-        <br />
-        <div class="col-sm-4">
-            Application Name<br />
-            Street address<br />
-            city state zip
+        <p class="lead">Bummer! Your account isn't active yet. Make sure you've submitted your documents and check back frequently!</p>
+        <hr class="my-4" />
+        <div class="row">
+            <div class="col-md-8">
+                <p>Need to submit your documents? Send them our way!</p>
+                Application Name<br />
+                Street address<br />
+                city state zip<br />
+                Application@email.com
+            </div>
+            <div class="col-md-4 mt-5">
+                <p><a class="col-sm-4 btn-primary btn-lg text-center" href="@Url.Action("Index", "Home")">Back Home</a></p>
+            </div>
         </div>
-        <div class="col-sm-4">
-            Application@email.com
-        </div>
-        <p><a class="col-sm-4 btn-primary btn-lg text-center" href="@Url.Action("Index", "Home")">Back Home</a></p>
-        <br />
-        <br />
     </div>
 }
-@if (Model.Active == true)
+@if (Model.Active == true && Model.RegistrationCompleted == false)
 {
-
+    <div class="jumbotron">
+        <h1 class="display-3">Hey! Your account has been activated!</h1>
+        <p class="lead">Welcome! We're glad you're here!</p>
+        <hr class="my-4">
+        <p>Before the real fun can begin, please complete your account registration so Supporters know who you are.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Finish Registration</a>
+        </p>
+    </div>
 }
-    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                    <h4 class="card-title">Primary card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+                <h4 class="card-title">Success card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Header</div>
+                <div class="card-body">
+                    <h4 class="card-title">Primary card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<hr />
 <div>
-    <h4>Contact Information</h4>
-    <h5>@Model.OrganizationName</h5>
+    <h3>Contact Information</h3>
+    <h4>@Model.OrganizationName</h4>
+
     @if (Model.OrganizationPhone != 0)
     {
-        @Html.DisplayFor(m => m.OrganizationPhone)
+        <p>@Model.OrganizationPhone</p>
     }
     @if (Model.OrganizationPhone == 0)
     {
-        <h6>No Phone Number Saved</h6>
+        <p style="color: maroon">No Phone Number Saved</p>
     }
     @Html.DisplayFor(m => m.User.Email)
     <br />
@@ -55,22 +88,41 @@
     @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
 </div>
 <hr />
-<div>
-    <h4>Address Book</h4>
-    <div class="row">
-        <div class="col-sm-6">
-            <h5>Shipping Address:</h5>
-            @Html.DisplayFor(m => m.ShipAddress.StreetAddress)<br />
-            @Html.DisplayFor(m => m.ShipAddress.City),
-        </div>
-        <div class="col-sm-6">
-            <h5>Drop-Off Address:</h5>
-            123 Drop Off St.<br />
-            City, State Zip
-        </div>
-        <br />
+<div class="row">
+    <div class="col-md-12">
+        <h3>Address Book</h3>
         @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
         @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
     </div>
+    <div class="col-sm-6">
+        <h4>Shipping Address:</h4>
+        @if (Model.ShipAddress != null)
+        {<p>
+                @Model.ShipAddress.StreetAddress<br />
+                @Model.ShipAddress.City, @Model.ShipAddress.State @Model.ShipAddress.Zipcode
+            </p>
+        }
+        @if (Model.ShipAddress == null)
+        {
+            <p style="color: maroon">No Shipping Address Saved</p>
+        }
+    </div>
+    <div class="col-sm-6">
+        <h4>Drop-Off Address:</h4>
+        @if (Model.DropAddress != null)
+        {
+            <p>
+                @Model.DropAddress.StreetAddress<br />
+                @Model.DropAddress.City, @Model.DropAddress.State @Model.DropAddress.Zipcode
+            </p>
+        }
+        @if (Model.DropAddress == null)
+        {
+            <p style="color: maroon">No Drop-Off Address Saved</p>
+        }
+    </div>
+    <br />
+
 </div>
+
 
