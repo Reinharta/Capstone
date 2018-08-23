@@ -18,9 +18,6 @@
             Account Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrganizationPhone)
-        </th>
-        <th>
 
         </th>
     </tr>
@@ -40,12 +37,9 @@
                     <td>Inactive</td>
                 }
             <td>
-                @Html.DisplayFor(modelItem => item.OrganizationPhone)
-            </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.AddressId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AddressId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AddressId })*@
+                <a class="btn btn-primary" href="@Url.Action("AuthorizeAccount", "Admin", new { accountId=item.OrganizationId })">
+                    Authorize Account
+                </a>
             </td>
         </tr>
     }

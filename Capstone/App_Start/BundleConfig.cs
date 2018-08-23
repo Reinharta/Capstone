@@ -23,6 +23,7 @@ namespace Capstone
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",  
                       "~/Content/bootstrap-mintyTheme.css",
                       "~/Content/site.css"));
         }

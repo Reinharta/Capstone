@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
+using Capstone.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace Capstone.Controllers
@@ -90,6 +91,40 @@ namespace Capstone.Controllers
             ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.ShippingAddress);
             return View(nonprofitOrganization);
         }
+
+
+        public ActionResult FinishRegistration(int id)
+        {
+            //FinishRegistrationViewModel viewModel = new FinishRegistrationViewModel()
+            //{
+            //    OrganizationId = id,
+            //    OrganizationName = db.NonprofitOrganizations.Where(c => c.OrganizationId == id).First().OrganizationName
+            //};
+
+            ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
+            ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
+            return View();
+        }
+
+        // POST: NonprofitOrganizations/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FinishRegistration([Bind(Include = "OrganizationId,Active,OrganizationName,ShippingAddress,DropOffAddress,OrganizationDescription,OrganizationWebsite,OrganizationPhone")] NonprofitOrganization nonprofitOrganization)
+        {
+            if (ModelState.IsValid)
+            {
+                db.NonprofitOrganizations.Add(nonprofitOrganization);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.DropOffAddress);
+            ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.ShippingAddress);
+            return View(nonprofitOrganization);
+        }
+
 
         // GET: NonprofitOrganizations/Edit/5
         public ActionResult Edit(int? id)
