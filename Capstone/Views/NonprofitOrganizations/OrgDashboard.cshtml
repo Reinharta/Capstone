@@ -74,11 +74,11 @@
     <h3>Contact Information</h3>
     <h4>@Model.OrganizationName</h4>
 
-    @if (Model.OrganizationPhone != 0)
+    @if (Model.OrganizationPhone != null)
     {
         <p>@Model.OrganizationPhone</p>
     }
-    @if (Model.OrganizationPhone == 0)
+    @if (Model.OrganizationPhone == null)
     {
         <p style="color: maroon">No Phone Number Saved</p>
     }

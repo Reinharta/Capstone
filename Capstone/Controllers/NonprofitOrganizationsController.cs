@@ -48,6 +48,7 @@ namespace Capstone.Controllers
             return View(nonprofitOrganization);
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult PreCreate(ApplicationUser user)
         {
             var organization = new NonprofitOrganization()
@@ -60,16 +61,22 @@ namespace Capstone.Controllers
                 ShipAddress = null,
                 DropAddress = null
             };
-            db.NonprofitOrganizations.Add(organization);
-            db.SaveChanges();
-            return View("RegistrationLanding");
+
+            if (ModelState.IsValid)
+            {
+                db.NonprofitOrganizations.Add(organization);
+                db.SaveChanges(); //THROWING EXCEPTION HERE
+                return View("RegistrationLanding");
+            }
+
+            return View("RegisterOrganization", "Account", organization);
         }
 
         // GET: NonprofitOrganizations/Create
         public ActionResult Create()
         {
-            ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
-            ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
+            //ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
+            //ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
             return View();
         }
 
@@ -78,13 +85,20 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrganizationId,Active,OrganizationName,ShippingAddress,DropOffAddress,OrganizationDescription,OrganizationWebsite,OrganizationPhone")] NonprofitOrganization nonprofitOrganization)
+        public ActionResult Create([Bind(Include = "OrganizationName,OrganizationWebsite,OrganizationPhone")] NonprofitOrganization nonprofitOrganization)
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+
+                nonprofitOrganization.Active = false;
+                nonprofitOrganization.RegistrationCompleted = false;
+                nonprofitOrganization.UserId = userId;
+                nonprofitOrganization.User = db.Users.Where(c => c.Id == userId).First();
+
                 db.NonprofitOrganizations.Add(nonprofitOrganization);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("RegistrationLanding");
             }
 
             ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.DropOffAddress);

@@ -166,7 +166,7 @@ namespace Capstone.Controllers
             if (ModelState.IsValid)
             {
                 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, OrganizationName = model.OrganizationName, UserRole = "Organization"};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, UserRole = "Organization"};
 
                 var result = await UserManager.CreateAsync(user, model.Password);              
                 if (result.Succeeded)
@@ -178,8 +178,8 @@ namespace Capstone.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
-                    return RedirectToAction("PreCreate", "NonprofitOrganizations", user);
+                    await this.UserManager.AddToRoleAsync(user.Id, user.UserRole);
+                    return RedirectToAction("Create", "NonprofitOrganizations", user);
                 }
                 AddErrors(result);
             }
@@ -204,7 +204,7 @@ namespace Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, SupporterFirstName = model.SupporterFirstName, SupporterLastName = model.SupporterLastName, UserRole = "Supporter" };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, UserRole = "Supporter" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -36,8 +36,7 @@ namespace Capstone.Models
 
         [Display(Name = "Website")]
         public string OrganizationWebsite { get; set; }
-
-        [RegularExpression(@"^\+1 \(\d{3}\) \d{3}-\d{4}$", ErrorMessage = "Invalid Phone Number.")]
+       
         [Display(Name = "Phone")]
         public string OrganizationPhone { get; set; }
 
