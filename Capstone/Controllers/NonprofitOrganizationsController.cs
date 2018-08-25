@@ -114,10 +114,15 @@ namespace Capstone.Controllers
             //    OrganizationId = id,
             //    OrganizationName = db.NonprofitOrganizations.Where(c => c.OrganizationId == id).First().OrganizationName
             //};
-
+            var organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == id).First();
             ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
             ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
-            return View();
+
+            FinishRegistrationViewModel viewModel = new FinishRegistrationViewModel() {
+                OrganizationId = organization.OrganizationId,
+                OrganizationName = organization.OrganizationName
+            };
+            return View(viewModel);
         }
 
         // POST: NonprofitOrganizations/Create
@@ -125,21 +130,71 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FinishRegistration([Bind(Include = "OrganizationId,Active,OrganizationName,ShippingAddress,DropOffAddress,OrganizationDescription,OrganizationWebsite,OrganizationPhone")] NonprofitOrganization nonprofitOrganization)
+        public ActionResult FinishRegistration([Bind(Include = "OrganizationId,Active,OrganizationName,ShipZipcode,ShipState,ShipCity,DropZipcode,DropState,DropCity,DropStreetAddress,ShipStreetAddress,OrganizationDescription,OrganizationWebsite,OrganizationPhone")] FinishRegistrationViewModel newOrganizationInfo)
         {
+            var userId = User.Identity.GetUserId();
+            NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.UserId == userId).First();
+
             if (ModelState.IsValid)
-            {
-                db.NonprofitOrganizations.Add(nonprofitOrganization);
+            { 
+                var dropAddId = AddDropAddressGetId(newOrganizationInfo);
+                var shipAddId = AddShipAddressGetId(newOrganizationInfo);
+
+                organization.DropAddress = db.Addresses.Where(c => c.AddressId == dropAddId).First();
+                organization.ShipAddress = db.Addresses.Where(c => c.AddressId == shipAddId).First();
+                organization.OrganizationPhone = newOrganizationInfo.PhoneNumber;
+                organization.OrganizationWebsite = newOrganizationInfo.OrganizationWebsite;
+                organization.OrganizationDescription = newOrganizationInfo.OrganizationDescription;
+                organization.RegistrationCompleted = true;
+
+
+                db.Entry(organization).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Dashboard", "NonprofitOrganizations", organization);
+
+
+                //db.NonprofitOrganizations.Add(newOrganizationInfo);
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
             }
 
-            ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.DropOffAddress);
-            ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.ShippingAddress);
-            return View(nonprofitOrganization);
+            ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", organization.DropOffAddress);
+            ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", organization.ShippingAddress);
+            return View(newOrganizationInfo);
         }
 
+        public int AddShipAddressGetId (FinishRegistrationViewModel newOrganizationInfo)
+        {
+            Address newShipAddress = new Address()
+            {
+                ContactPerson = newOrganizationInfo.ShipContact,
+                StreetAddress = newOrganizationInfo.ShipStreetAddress,
+                City = newOrganizationInfo.ShipCity,
+                State = newOrganizationInfo.ShipState,
+                Zipcode = newOrganizationInfo.ShipZipcode
+            };
 
+            db.Addresses.Add(newShipAddress);
+            db.SaveChanges();
+            return newShipAddress.AddressId;
+        
+        }
+
+        public int AddDropAddressGetId (FinishRegistrationViewModel newOrganizationInfo)
+        {
+            Address newDropAddress = new Address()
+            {
+                ContactPerson = newOrganizationInfo.DropContact,
+                StreetAddress = newOrganizationInfo.DropStreetAddress,
+                City = newOrganizationInfo.DropCity,
+                State = newOrganizationInfo.DropState,
+                Zipcode = newOrganizationInfo.DropZipcode
+            };
+
+            db.Addresses.Add(newDropAddress);
+            db.SaveChanges();
+            return newDropAddress.AddressId;
+        }
         // GET: NonprofitOrganizations/Edit/5
         public ActionResult Edit(int? id)
         {
