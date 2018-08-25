@@ -130,7 +130,7 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FinishRegistration([Bind(Include = "OrganizationId,Active,OrganizationName,ShipZipcode,ShipState,ShipCity,DropZipcode,DropState,DropCity,DropStreetAddress,ShipStreetAddress,OrganizationDescription,OrganizationWebsite,OrganizationPhone")] FinishRegistrationViewModel newOrganizationInfo)
+        public ActionResult FinishRegistration([Bind(Include = "OrganizationId,Active,OrganizationName,ShipContact,DropContact,ShipZipcode,ShipState,ShipCity,DropZipcode,DropState,DropCity,DropStreetAddress,ShipStreetAddress,OrganizationDescription,OrganizationWebsite,PhoneNumber")] FinishRegistrationViewModel newOrganizationInfo)
         {
             var userId = User.Identity.GetUserId();
             NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.UserId == userId).First();

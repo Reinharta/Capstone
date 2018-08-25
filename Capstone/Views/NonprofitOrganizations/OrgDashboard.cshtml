@@ -31,7 +31,7 @@
 @if (Model.Active == true && Model.RegistrationCompleted == false)
 {
     <div class="jumbotron">
-        <h1 class="display-3">Hey! Your account has been activated!</h1>
+        <h2 class="display-4">Hey! <br/>Your account has been activated!</h2>
         <p class="lead">Welcome! We're glad you're here!</p>
         <hr class="my-4">
         <p>Before the real fun can begin, please complete your account registration so Supporters know who you are.</p>
@@ -94,8 +94,8 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
         @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
     </div>
-    <div class="col-sm-6">
-        <h4>Shipping Address:</h4>
+    <div class="col-sm-6 mt-4">
+        <h5>Shipping Address:</h5>
         @if (Model.ShipAddress != null)
         {<p>
                 @Model.ShipAddress.StreetAddress<br />
@@ -107,8 +107,8 @@
             <p style="color: maroon">No Shipping Address Saved</p>
         }
     </div>
-    <div class="col-sm-6">
-        <h4>Drop-Off Address:</h4>
+    <div class="col-sm-6 mt-4">
+        <h5>Drop-Off Address:</h5>
         @if (Model.DropAddress != null)
         {
             <p>
