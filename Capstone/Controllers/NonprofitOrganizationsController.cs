@@ -16,20 +16,27 @@ namespace Capstone.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Dashboard(NonprofitOrganization organization)
+        public ActionResult Dashboard(int? organizationId)
         {
-            if(organization == null)
+            if(organizationId == null)
             {
-                ApplicationUser user = db.Users.Where(c => c.Id == User.Identity.GetUserId()).First();
-                organization = db.NonprofitOrganizations.Where(c => c.UserId == user.Id).First();
+                var userId = User.Identity.GetUserId();
+                ApplicationUser user = db.Users.Where(c => c.Id == userId).First();
+                var organization = db.NonprofitOrganizations.Where(c => c.UserId == user.Id).Include(d => d.ShipAddress).Include(d => d.DropAddress).First();
+                return View("OrgDashboard", organization);
             }
-            return View("OrgDashboard", organization);
+            else if(organizationId != 0)
+            {
+                var organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).Include(d => d.ShipAddress).Include(d => d.DropAddress).First();
+                return View("OrgDashboard", organization);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: NonprofitOrganizations
         public ActionResult Index()
         {
-            var nonprofitOrganizations = db.NonprofitOrganizations.Include(n => n.DropAddress).Include(n => n.ShipAddress);
+            var nonprofitOrganizations = db.NonprofitOrganizations.Include(d => d.ShipAddress).Include(d => d.DropAddress);
             return View(nonprofitOrganizations.ToList());
         }
 
@@ -133,7 +140,7 @@ namespace Capstone.Controllers
         public ActionResult FinishRegistration([Bind(Include = "OrganizationId,Active,OrganizationName,ShipContact,DropContact,ShipZipcode,ShipState,ShipCity,DropZipcode,DropState,DropCity,DropStreetAddress,ShipStreetAddress,OrganizationDescription,OrganizationWebsite,PhoneNumber")] FinishRegistrationViewModel newOrganizationInfo)
         {
             var userId = User.Identity.GetUserId();
-            NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.UserId == userId).First();
+            NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.UserId == userId).Include(d => d.ShipAddress).Include(d => d.DropAddress).First();
 
             if (ModelState.IsValid)
             { 
@@ -147,10 +154,11 @@ namespace Capstone.Controllers
                 organization.OrganizationDescription = newOrganizationInfo.OrganizationDescription;
                 organization.RegistrationCompleted = true;
 
-
+                
                 db.Entry(organization).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Dashboard", "NonprofitOrganizations", organization);
+               
+                return RedirectToAction("Dashboard", "NonprofitOrganizations", organization.OrganizationId);
 
 
                 //db.NonprofitOrganizations.Add(newOrganizationInfo);

@@ -252,9 +252,15 @@
     <Compile Include="Migrations\201808231615467_update.Designer.cs">
       <DependentUpon>201808231615467_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808260311379_added cartItem and donationItem models.cs" />
+    <Compile Include="Migrations\201808260311379_added cartItem and donationItem models.Designer.cs">
+      <DependentUpon>201808260311379_added cartItem and donationItem models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\DonationItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NonprofitOrganization.cs" />
@@ -263,6 +269,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="ViewModels\FinishRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\OrgDashboardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-mintyTheme.css" />
@@ -270,6 +277,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\icons8-add-new-64.png" />
+    <Content Include="Content\Images\icons8-gift-64.png" />
+    <Content Include="Content\Images\icons8-home-64.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -398,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808231615467_update.resx">
       <DependentUpon>201808231615467_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808260311379_added cartItem and donationItem models.resx">
+      <DependentUpon>201808260311379_added cartItem and donationItem models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

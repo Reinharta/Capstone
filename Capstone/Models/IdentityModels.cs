@@ -38,7 +38,10 @@ namespace Capstone.Models
         public DbSet<Address> Addresses { get; set; }
         public DbSet<NonprofitOrganization> NonprofitOrganizations { get; set; }
         public DbSet<Supporter> Supporters { get; set; }
-        
+        public DbSet<DonationItem> DonationItem { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
+
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

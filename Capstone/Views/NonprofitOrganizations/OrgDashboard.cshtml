@@ -31,7 +31,7 @@
 @if (Model.Active == true && Model.RegistrationCompleted == false)
 {
     <div class="jumbotron">
-        <h2 class="display-4">Hey! <br/>Your account has been activated!</h2>
+        <h2 class="display-4">Hey! <br />Your account has been activated!</h2>
         <p class="lead">Welcome! We're glad you're here!</p>
         <hr class="my-4">
         <p>Before the real fun can begin, please complete your account registration so Supporters know who you are.</p>
@@ -40,37 +40,42 @@
         </p>
     </div>
 }
+<hr class="mt-4" />
+<div class="row justify-content-center">
 
-    <div class="row justify-content-center">
-        <div class="col-md-4">
+
+    <div class="col-md-4">
+        <a href="#">
             <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header text-center">ADD REQUEST</div>
-                <div class="card-body">
-                    <h4 class="card-title">Primary card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+                <div class="card-header text-center">ADD DONATION REQUEST</div>
+                <img src="~/Content/Images/icons8-add-new-64.png" width="130" />
             </div>
-        </div>
-        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-            <div class="card-header text-center">PENDING DONATIONS</div>
-            <div class="card-body">
-                <h4 class="card-title">Success card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header text-center">ORGANIZATION HOME</div>
-                <div class="card-body">
-                    <h4 class="card-title">Primary card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
+        </a>
+
     </div>
+
+    <div class="col-md-4">
+        <a href="#">
+            <div class="card text-white bg-success mb-3 align-items-center" style="max-width: 20rem;">
+                <div class="card-header text-center">PENDING DONATIONS</div>
+                <img src="~/Content/Images/icons8-gift-64.png" width="130" />
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="#">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">ORGANIZATION PROFILE HOME</div>
+                <img src="~/Content/Images/icons8-home-64.png" width="130" />
+            </div>
+        </a>
+    </div>
+</div>
 
 <hr />
 <div>
+
     <h3>Contact Information</h3>
     <h4>@Model.OrganizationName</h4>
 
@@ -96,7 +101,7 @@
     </div>
     <div class="col-sm-6 mt-4">
         <h5>Shipping Address:</h5>
-        @if (Model.ShipAddress != null)
+        @if (Model.ShippingAddress != null)
         {<p>
                 @Model.ShipAddress.StreetAddress<br />
                 @Model.ShipAddress.City, @Model.ShipAddress.State @Model.ShipAddress.Zipcode
@@ -109,7 +114,7 @@
     </div>
     <div class="col-sm-6 mt-4">
         <h5>Drop-Off Address:</h5>
-        @if (Model.DropAddress != null)
+        @if (Model.DropOffAddress != null)
         {
             <p>
                 @Model.DropAddress.StreetAddress<br />
