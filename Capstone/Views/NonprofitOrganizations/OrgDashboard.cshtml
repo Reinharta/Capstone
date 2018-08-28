@@ -46,7 +46,7 @@
 
     <div class="col-md-4">
         <a href="#">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card text-white bg-primary mb-3 align-items-center" style="max-width: 20rem;">
                 <div class="card-header text-center">ADD DONATION REQUEST</div>
                 <img src="~/Content/Images/icons8-add-new-64.png" width="130" />
             </div>
@@ -64,8 +64,8 @@
     </div>
 
     <div class="col-md-4">
-        <a href="#">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <a href = "@Url.Action("OrganizationProfile", "NonprofitOrganizations", new { organizationId = Model.OrganizationId})">
+            <div class="card text-white bg-primary mb-3 align-items-center" style="max-width: 20rem;">
                 <div class="card-header text-center">ORGANIZATION PROFILE HOME</div>
                 <img src="~/Content/Images/icons8-home-64.png" width="130" />
             </div>

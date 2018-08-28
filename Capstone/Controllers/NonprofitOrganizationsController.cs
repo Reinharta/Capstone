@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
 using Capstone.ViewModels;
+using GoogleMaps.LocationServices;
 using Microsoft.AspNet.Identity;
 
 namespace Capstone.Controllers
@@ -31,6 +32,25 @@ namespace Capstone.Controllers
                 return View("OrgDashboard", organization);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult OrganizationProfile (int organizationId)
+        {
+            NonprofitOrganization organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).Include(d => d.ShipAddress).Include(d => d.DropAddress).First();
+            ApplicationUser user = db.Users.Where(c => c.Id == organization.UserId).First();
+
+            OrganizationProfileViewModel viewModel = new OrganizationProfileViewModel()
+            {
+                Organization = organization,
+                Phone = organization.OrganizationPhone,
+                Email = user.Email,
+                Website = organization.OrganizationWebsite,
+                ShippingAddress = organization.ShipAddress,
+                DropOffAddress = organization.DropAddress
+            };
+            ViewBag.GoogleKey = System.Web.Configuration.webc
+
+            return View(viewModel);
         }
 
         // GET: NonprofitOrganizations
@@ -160,10 +180,6 @@ namespace Capstone.Controllers
                
                 return RedirectToAction("Dashboard", "NonprofitOrganizations", organization.OrganizationId);
 
-
-                //db.NonprofitOrganizations.Add(newOrganizationInfo);
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
             }
 
             ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", organization.DropOffAddress);
@@ -173,6 +189,9 @@ namespace Capstone.Controllers
 
         public int AddShipAddressGetId (FinishRegistrationViewModel newOrganizationInfo)
         {
+         
+
+
             Address newShipAddress = new Address()
             {
                 ContactPerson = newOrganizationInfo.ShipContact,
@@ -190,13 +209,39 @@ namespace Capstone.Controllers
 
         public int AddDropAddressGetId (FinishRegistrationViewModel newOrganizationInfo)
         {
+            //var gls = new GoogleLocationService();
+            //AddressData address = new AddressData()
+            //{
+            //    Address = newOrganizationInfo.DropStreetAddress,
+            //    City = newOrganizationInfo.DropCity,
+            //    State = newOrganizationInfo.DropState,
+            //    Zip = newOrganizationInfo.DropZipcode
+            //};
+
+            //var latlong = gls.GetLatLongFromAddress(address);
+            //var latitude = latlong.Latitude;
+            //var longitude = latlong.Longitude;
+
+
+
+            var address = newOrganizationInfo.DropStreetAddress + " " + newOrganizationInfo.DropCity + ", " + newOrganizationInfo.DropState + " " + newOrganizationInfo.DropZipcode;
+
+            var locationService = new GoogleLocationService();
+            var point = locationService.GetLatLongFromAddress(address);
+
+            var latitude = point.Latitude;
+            var longitude = point.Longitude;
+
+
             Address newDropAddress = new Address()
             {
                 ContactPerson = newOrganizationInfo.DropContact,
                 StreetAddress = newOrganizationInfo.DropStreetAddress,
                 City = newOrganizationInfo.DropCity,
                 State = newOrganizationInfo.DropState,
-                Zipcode = newOrganizationInfo.DropZipcode
+                Zipcode = newOrganizationInfo.DropZipcode,
+                Latitude = latitude,
+                Longitude = longitude
             };
 
             db.Addresses.Add(newDropAddress);
