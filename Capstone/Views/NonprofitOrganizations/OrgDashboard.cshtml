@@ -81,7 +81,12 @@
 
     @if (Model.OrganizationPhone != null)
     {
-        <p>@Model.OrganizationPhone</p>
+    <p>
+        @String.Format("({0}) {1}-{2}"
+             , Model.OrganizationPhone.Substring(0, 3)
+             , Model.OrganizationPhone.Substring(3, 3)
+             , Model.OrganizationPhone.Substring(6, Model.OrganizationPhone.Length - 6))
+        </p>
     }
     @if (Model.OrganizationPhone == null)
     {

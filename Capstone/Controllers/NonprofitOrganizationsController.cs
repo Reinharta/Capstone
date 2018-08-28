@@ -48,7 +48,7 @@ namespace Capstone.Controllers
                 ShippingAddress = organization.ShipAddress,
                 DropOffAddress = organization.DropAddress
             };
-            ViewBag.GoogleKey = System.Web.Configuration.webc
+            ViewBag.GoogleKey = System.Web.Configuration.WebConfigurationManager.AppSettings["GoogleMapsApiKey"];
 
             return View(viewModel);
         }
