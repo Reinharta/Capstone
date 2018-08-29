@@ -28,6 +28,14 @@ namespace Capstone.Migrations
             //}
 
 
+            ///SEEDING ORG CATEGORIES
+            context.OrganizationCategories.AddOrUpdate(x => x.Name,
+                new OrganizationCategory() { Name = "Shelter" },
+                new OrganizationCategory() { Name = "Food Pantry"},
+                new OrganizationCategory() { Name = "Public School"},
+                new OrganizationCategory() { Name = "Other"}
+                );
+
 
 
 

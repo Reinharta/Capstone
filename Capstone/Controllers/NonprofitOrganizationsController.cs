@@ -117,25 +117,29 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrganizationName,OrganizationWebsite,OrganizationPhone,CategoryId")] NonprofitOrganization nonprofitOrganization)
+        public ActionResult Create([Bind(Include = "OrganizationName,OrganizationWebsite,OrganizationPhone,CategoryId")] BeginRegistrationViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
+                NonprofitOrganization nonprofitOrganization = new NonprofitOrganization() {
+                    Active = false,
+                    RegistrationCompleted = false,
+                    UserId = userId,
+                    User = db.Users.Where(c => c.Id == userId).First(),
+                    CategoryId = viewModel.CategoryId,
+                    Category = db.OrganizationCategories.Where(c => c.CategoryId == viewModel.CategoryId).First(),
+                    OrganizationName = viewModel.OrganizationName,
+                    OrganizationPhone = viewModel.OrganizationPhone,
+                    OrganizationWebsite = viewModel.OrganizationWebsite,
 
-                nonprofitOrganization.Active = false;
-                nonprofitOrganization.RegistrationCompleted = false;
-                nonprofitOrganization.UserId = userId;
-                nonprofitOrganization.User = db.Users.Where(c => c.Id == userId).First();
-
+            };
                 db.NonprofitOrganizations.Add(nonprofitOrganization);
                 db.SaveChanges();
                 return View("RegistrationLanding");
             }
-
-            ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.DropOffAddress);
-            ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", nonprofitOrganization.ShippingAddress);
-            return View(nonprofitOrganization);
+          
+            return View(viewModel);
         }
 
 
