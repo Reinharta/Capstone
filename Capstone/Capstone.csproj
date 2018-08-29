@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DonationItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NonprofitOrganizationsController.cs" />
@@ -270,6 +271,10 @@
     <Compile Include="Migrations\201808290029418_Adding Category Tables.cs" />
     <Compile Include="Migrations\201808290029418_Adding Category Tables.Designer.cs">
       <DependentUpon>201808290029418_Adding Category Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808292330510_Completed DonationItem model.cs" />
+    <Compile Include="Migrations\201808292330510_Completed DonationItem model.Designer.cs">
+      <DependentUpon>201808292330510_Completed DonationItem model.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -376,6 +381,11 @@
     <Content Include="Views\Admin\PendingAccounts.cshtml" />
     <Content Include="Views\NonprofitOrganizations\FinishRegistration.cshtml" />
     <Content Include="Views\NonprofitOrganizations\OrganizationProfile.cshtml" />
+    <Content Include="Views\DonationItems\Create.cshtml" />
+    <Content Include="Views\DonationItems\Delete.cshtml" />
+    <Content Include="Views\DonationItems\Details.cshtml" />
+    <Content Include="Views\DonationItems\Edit.cshtml" />
+    <Content Include="Views\DonationItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -441,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808290029418_Adding Category Tables.resx">
       <DependentUpon>201808290029418_Adding Category Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808292330510_Completed DonationItem model.resx">
+      <DependentUpon>201808292330510_Completed DonationItem model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -31,11 +31,24 @@ namespace Capstone.Migrations
             ///SEEDING ORG CATEGORIES
             context.OrganizationCategories.AddOrUpdate(x => x.Name,
                 new OrganizationCategory() { Name = "Shelter" },
-                new OrganizationCategory() { Name = "Food Pantry"},
-                new OrganizationCategory() { Name = "Public School"},
+                new OrganizationCategory() { Name = "Food Pantry" },
+                new OrganizationCategory() { Name = "Public School" },
+                new OrganizationCategory() { Name = "Animal Shelter" },
                 new OrganizationCategory() { Name = "Other"}
                 );
 
+            context.itemCategories.AddOrUpdate(x => x.Name,
+                new ItemCategory() { Name = "Adult Clothing"},
+                new ItemCategory() { Name = "Craft & Office Supplies"},
+                new ItemCategory() { Name = "Personal Hygiene"},
+                new ItemCategory() { Name = "Children's & Infant Clothing" },
+                new ItemCategory() { Name = "Food - Non-Perishables"},
+                new ItemCategory() { Name = "Food - Perishables"},
+                new ItemCategory() { Name = "Electronics"},
+                new ItemCategory() { Name = "Media"},
+                new ItemCategory() { Name = "Toys & Games"},
+                new ItemCategory() { Name = "Other"}
+                );
 
 
 

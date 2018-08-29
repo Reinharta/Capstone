@@ -24,11 +24,15 @@ namespace Capstone.Models
 
         public ItemCategory Category { get; set; }
 
+        public string Brand { get; set; }
+
+        public string Color { get; set; }
+
         public string ItemDescription { get; set; }
 
         public int RequestingOrganizationId { get; set; }
         public NonprofitOrganization Organization { get; set; }
 
-        public int MyProperty { get; set; }
+
     }
 }
