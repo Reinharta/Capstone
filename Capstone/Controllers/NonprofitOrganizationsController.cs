@@ -104,7 +104,12 @@ namespace Capstone.Controllers
         {
             //ViewBag.DropOffAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
             //ViewBag.ShippingAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
-            return View();
+
+            BeginRegistrationViewModel viewModel = new BeginRegistrationViewModel()
+            {
+                Categories = db.OrganizationCategories.Distinct().ToList()
+            };
+            return View(viewModel);
         }
 
         // POST: NonprofitOrganizations/Create
@@ -112,7 +117,7 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrganizationName,OrganizationWebsite,OrganizationPhone")] NonprofitOrganization nonprofitOrganization)
+        public ActionResult Create([Bind(Include = "OrganizationName,OrganizationWebsite,OrganizationPhone,CategoryId")] NonprofitOrganization nonprofitOrganization)
         {
             if (ModelState.IsValid)
             {

@@ -40,6 +40,10 @@ namespace Capstone.Models
         [Display(Name = "Phone")]
         public string OrganizationPhone { get; set; }
 
+        //[ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        public OrganizationCategory Category { get; set; }
+
 
 
     }
