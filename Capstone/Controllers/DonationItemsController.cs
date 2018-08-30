@@ -44,10 +44,11 @@ namespace Capstone.Controllers
             {
                 OrganizationId = organizationId,
                 Organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).First(),
-                Categories = db.ItemCategories.Distinct().ToList()
+                //Categories = db.ItemCategories.Distinct().ToList()
             };
+            ViewBag.CategoryId = new SelectList(db.ItemCategories, "CategoryId", "Name", viewModel.CategoryId);
 
-            return View();
+            return View(viewModel);
         }
 
         // POST: DonationItems/Create

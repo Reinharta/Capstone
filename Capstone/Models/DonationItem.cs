@@ -15,7 +15,7 @@ namespace Capstone.Models
         [Required]
         public string ItemName { get; set; }
 
-        public int ItemQuantity { get; set; }
+        public int? ItemQuantity { get; set; }
 
         public string ItemSize { get; set; }
 
@@ -31,8 +31,11 @@ namespace Capstone.Models
         [Required]
         public string ItemDescription { get; set; }
 
+        [NotMapped]
         [DataType(DataType.Upload)]
         public HttpPostedFileBase ImageUpload { get; set; }
+
+        public string ImageFilePath { get; set; }
 
         [ForeignKey("Organization")]
         public int RequestingOrganizationId { get; set; }

@@ -32,7 +32,7 @@ namespace Capstone.ViewModels
         public HttpPostedFileBase ImageUpload { get; set; }
         public string File { get; set; }
 
-        public List<ItemCategory> Categories { get; set; }
+        //public IEnumerable<ItemCategory> Categories { get; set; }
 
 
 

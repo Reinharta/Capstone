@@ -281,6 +281,14 @@
     <Compile Include="Migrations\201808300018520_adding image upload model.Designer.cs">
       <DependentUpon>201808300018520_adding image upload model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808300313272_fixing exception.cs" />
+    <Compile Include="Migrations\201808300313272_fixing exception.Designer.cs">
+      <DependentUpon>201808300313272_fixing exception.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808300350596_add nullable size prop.cs" />
+    <Compile Include="Migrations\201808300350596_add nullable size prop.Designer.cs">
+      <DependentUpon>201808300350596_add nullable size prop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -466,6 +474,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808300018520_adding image upload model.resx">
       <DependentUpon>201808300018520_adding image upload model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808300313272_fixing exception.resx">
+      <DependentUpon>201808300313272_fixing exception.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808300350596_add nullable size prop.resx">
+      <DependentUpon>201808300350596_add nullable size prop.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
