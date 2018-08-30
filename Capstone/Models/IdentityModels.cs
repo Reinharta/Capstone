@@ -41,7 +41,8 @@ namespace Capstone.Models
         public DbSet<DonationItem> DonationItem { get; set; }
         public DbSet<CartItem> CartItem { get; set; }
         public DbSet<OrganizationCategory> OrganizationCategories { get; set; }
-        public DbSet<ItemCategory> itemCategories { get; set; }
+        public DbSet<ItemCategory> ItemCategories { get; set; }
+        public DbSet<ImageUpload> ImageUploads { get; set; }
 
 
         public ApplicationDbContext()

@@ -202,6 +202,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DonationItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageUploadController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NonprofitOrganizationsController.cs" />
     <Compile Include="Controllers\SupportersController.cs" />
@@ -276,10 +277,15 @@
     <Compile Include="Migrations\201808292330510_Completed DonationItem model.Designer.cs">
       <DependentUpon>201808292330510_Completed DonationItem model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808300018520_adding image upload model.cs" />
+    <Compile Include="Migrations\201808300018520_adding image upload model.Designer.cs">
+      <DependentUpon>201808300018520_adding image upload model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\ImageUpload.cs" />
     <Compile Include="Models\ItemCategory.cs" />
     <Compile Include="Models\DonationItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -291,6 +297,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="ViewModels\BeginRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\DonationItemCreateViewModel.cs" />
     <Compile Include="ViewModels\FinishRegistrationViewModel.cs" />
     <Compile Include="ViewModels\OrganizationProfileViewModel.cs" />
     <Compile Include="ViewModels\OrgDashboardViewModel.cs" />
@@ -389,6 +396,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
+    <Folder Include="Views\ImageUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -454,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808292330510_Completed DonationItem model.resx">
       <DependentUpon>201808292330510_Completed DonationItem model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808300018520_adding image upload model.resx">
+      <DependentUpon>201808300018520_adding image upload model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

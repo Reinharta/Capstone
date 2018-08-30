@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
+using Capstone.ViewModels;
 
 namespace Capstone.Controllers
 {
@@ -37,9 +38,15 @@ namespace Capstone.Controllers
         }
 
         // GET: DonationItems/Create
-        public ActionResult Create()
+        public ActionResult Create(int organizationId)
         {
-            ViewBag.CategoryId = new SelectList(db.itemCategories, "CategoryId", "Name");
+            DonationItemCreateViewModel viewModel = new DonationItemCreateViewModel()
+            {
+                OrganizationId = organizationId,
+                Organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).First(),
+                Categories = db.ItemCategories.Distinct().ToList()
+            };
+
             return View();
         }
 
@@ -48,17 +55,32 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemQuantity,ItemSize,CategoryId,ItemDescription,RequestingOrganizationId,MyProperty")] DonationItem donationItem)
+        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemQuantity,ItemSize,CategoryId,Brand,Color,ItemDescription,RequestingOrganizationId,Organization,ImageUpload")] DonationItemCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.DonationItem.Add(donationItem);
+                DonationItem item = new DonationItem()
+                {
+                    ItemName = vm.ItemName,
+                    ItemQuantity = vm.ItemQuantity,
+                    ItemSize = vm.ItemSize,
+                    CategoryId = vm.CategoryId,
+                    Category = db.ItemCategories.Where(c => c.CategoryId == vm.CategoryId).First(),
+                    Brand = vm.Brand,
+                    Color = vm.Color,
+                    ItemDescription = vm.ItemDescription,
+                    ImageUpload = vm.ImageUpload,
+                    RequestingOrganizationId = vm.OrganizationId,
+                    Organization = vm.Organization
+                };
+
+                db.DonationItem.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.itemCategories, "CategoryId", "Name", donationItem.CategoryId);
-            return View(donationItem);
+            
+            return View(vm);
         }
 
         // GET: DonationItems/Edit/5
@@ -73,7 +95,7 @@ namespace Capstone.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.itemCategories, "CategoryId", "Name", donationItem.CategoryId);
+            ViewBag.CategoryId = new SelectList(db.ItemCategories, "CategoryId", "Name", donationItem.CategoryId);
             return View(donationItem);
         }
 
@@ -90,7 +112,7 @@ namespace Capstone.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.itemCategories, "CategoryId", "Name", donationItem.CategoryId);
+            ViewBag.CategoryId = new SelectList(db.ItemCategories, "CategoryId", "Name", donationItem.CategoryId);
             return View(donationItem);
         }
 

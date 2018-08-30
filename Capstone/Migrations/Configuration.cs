@@ -37,7 +37,7 @@ namespace Capstone.Migrations
                 new OrganizationCategory() { Name = "Other"}
                 );
 
-            context.itemCategories.AddOrUpdate(x => x.Name,
+            context.ItemCategories.AddOrUpdate(x => x.Name,
                 new ItemCategory() { Name = "Adult Clothing"},
                 new ItemCategory() { Name = "Craft & Office Supplies"},
                 new ItemCategory() { Name = "Personal Hygiene"},
