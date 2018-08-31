@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -56,7 +57,7 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemQuantity,ItemSize,CategoryId,Brand,Color,ItemDescription,RequestingOrganizationId,Organization,ImageUpload")] DonationItemCreateViewModel vm)
+        public ActionResult Create([Bind(Include = "ItemId,ItemName,ItemQuantity,ItemSize,CategoryId,Brand,Color,ItemDescription,OrganizationId,Organization,ImageUpload")] DonationItemCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -70,14 +71,23 @@ namespace Capstone.Controllers
                     Brand = vm.Brand,
                     Color = vm.Color,
                     ItemDescription = vm.ItemDescription,
-                    ImageUpload = vm.ImageUpload,
                     RequestingOrganizationId = vm.OrganizationId,
                     Organization = vm.Organization
                 };
 
+                if (vm.ImageUpload != null && vm.ImageUpload.ContentLength > 0)
+                {
+                    var uploadDir = "~/Content";
+                    var imagePath = Path.Combine(Server.MapPath("~/Content/ImageUploads"), vm.ImageUpload.FileName);
+                    var imageUrl = Path.Combine(uploadDir, vm.ImageUpload.FileName);
+                    vm.ImageUpload.SaveAs(imagePath);
+                    item.ImageFilePath = imageUrl;
+                }
+
+
                 db.DonationItem.Add(item);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", item.ItemId);
             }
 
             

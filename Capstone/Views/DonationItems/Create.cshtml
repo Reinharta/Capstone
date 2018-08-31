@@ -7,12 +7,12 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
-{
+<form action="" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
     
 <div class="form-horizontal">
-    <h4>DonationItem</h4>
+    <h4>Donation Item</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -74,17 +74,15 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+        
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.ImageUpload, new { type = "file" })
         </div>
+            @*<div class="col-md-offset-2 col-md-10">
+                <input type="file" name="ImageData" id="ImageData" value="Upload" class="btn btn-primary" />
+            </div>*@
     </div>
 
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Upload" class="btn btn-primary" />
-        </div>
-    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 text-success">
             @ViewBag.FileStatus
@@ -94,11 +92,11 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-primary" />
         </div>
     </div>
 </div>
-}
+</form>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
