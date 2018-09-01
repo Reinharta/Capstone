@@ -73,66 +73,81 @@
     </div>
 </div>
 
-<hr />
-<div>
+<div class="row justify-content-center">
 
-    <h3>Contact Information</h3>
-    <h4>@Model.OrganizationName</h4>
 
-    @if (Model.OrganizationPhone != null)
-    {
-    <p>
-        @String.Format("({0}) {1}-{2}"
-             , Model.OrganizationPhone.Substring(0, 3)
-             , Model.OrganizationPhone.Substring(3, 3)
-             , Model.OrganizationPhone.Substring(6, Model.OrganizationPhone.Length - 6))
-        </p>
-    }
-    @if (Model.OrganizationPhone == null)
-    {
-        <p style="color: maroon">No Phone Number Saved</p>
-    }
-    @Html.DisplayFor(m => m.User.Email)
-    <br />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
-    @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+    <div class="col-md-4">
+        <a href="@Url.Action("Index", "DonationItems", new { organizationId = Model.OrganizationId })">
+            <div class="card text-white bg-primary mb-3 align-items-center" style="max-width: 20rem;">
+                <div class="card-header text-center">Donation Request List</div>
+                <img src="~/Content/Images/icons8-bulleted-list-48.png" width="130" />
+            </div>
+        </a>
+
+    </div>
 </div>
-<hr />
-<div class="row">
-    <div class="col-md-12">
-        <h3>Address Book</h3>
+
+
+    <hr />
+    <div>
+
+        <h3>Contact Information</h3>
+        <h4>@Model.OrganizationName</h4>
+
+        @if (Model.OrganizationPhone != null)
+        {
+            <p>
+                @String.Format("({0}) {1}-{2}"
+                     , Model.OrganizationPhone.Substring(0, 3)
+                     , Model.OrganizationPhone.Substring(3, 3)
+                     , Model.OrganizationPhone.Substring(6, Model.OrganizationPhone.Length - 6))
+            </p>
+        }
+        @if (Model.OrganizationPhone == null)
+        {
+            <p style="color: maroon">No Phone Number Saved</p>
+        }
+        @Html.DisplayFor(m => m.User.Email)
+        <br />
         @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
         @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
     </div>
-    <div class="col-sm-6 mt-4">
-        <h5>Shipping Address:</h5>
-        @if (Model.ShippingAddress != null)
-        {<p>
-                @Model.ShipAddress.StreetAddress<br />
-                @Model.ShipAddress.City, @Model.ShipAddress.State @Model.ShipAddress.Zipcode
-            </p>
-        }
-        @if (Model.ShipAddress == null)
-        {
-            <p style="color: maroon">No Shipping Address Saved</p>
-        }
-    </div>
-    <div class="col-sm-6 mt-4">
-        <h5>Drop-Off Address:</h5>
-        @if (Model.DropOffAddress != null)
-        {
-            <p>
-                @Model.DropAddress.StreetAddress<br />
-                @Model.DropAddress.City, @Model.DropAddress.State @Model.DropAddress.Zipcode
-            </p>
-        }
-        @if (Model.DropAddress == null)
-        {
-            <p style="color: maroon">No Drop-Off Address Saved</p>
-        }
-    </div>
-    <br />
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Address Book</h3>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
+            @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+        </div>
+        <div class="col-sm-6 mt-4">
+            <h5>Shipping Address:</h5>
+            @if (Model.ShippingAddress != null)
+            {<p>
+                    @Model.ShipAddress.StreetAddress<br />
+                    @Model.ShipAddress.City, @Model.ShipAddress.State @Model.ShipAddress.Zipcode
+                </p>
+            }
+            @if (Model.ShipAddress == null)
+            {
+                <p style="color: maroon">No Shipping Address Saved</p>
+            }
+        </div>
+        <div class="col-sm-6 mt-4">
+            <h5>Drop-Off Address:</h5>
+            @if (Model.DropOffAddress != null)
+            {
+                <p>
+                    @Model.DropAddress.StreetAddress<br />
+                    @Model.DropAddress.City, @Model.DropAddress.State @Model.DropAddress.Zipcode
+                </p>
+            }
+            @if (Model.DropAddress == null)
+            {
+                <p style="color: maroon">No Drop-Off Address Saved</p>
+            }
+        </div>
+        <br />
 
-</div>
+    </div>
 
 

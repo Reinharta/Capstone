@@ -289,6 +289,10 @@
     <Compile Include="Migrations\201808300350596_add nullable size prop.Designer.cs">
       <DependentUpon>201808300350596_add nullable size prop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809010348352_adding displays.cs" />
+    <Compile Include="Migrations\201809010348352_adding displays.Designer.cs">
+      <DependentUpon>201809010348352_adding displays.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -309,6 +313,7 @@
     <Compile Include="ViewModels\FinishRegistrationViewModel.cs" />
     <Compile Include="ViewModels\OrganizationProfileViewModel.cs" />
     <Compile Include="ViewModels\OrgDashboardViewModel.cs" />
+    <Compile Include="ViewModels\OrgRequestItemsListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-mintyTheme.css" />
@@ -317,8 +322,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\icons8-add-new-64.png" />
+    <Content Include="Content\Images\icons8-bulleted-list-48.png" />
     <Content Include="Content\Images\icons8-gift-64.png" />
     <Content Include="Content\Images\icons8-home-64.png" />
+    <Content Include="Content\ImageUploads\art-art-materials-artistic-256484.jpg" />
+    <Content Include="Content\ImageUploads\M1A1-Bagdad-RunningOver.jpg" />
+    <Content Include="Content\ImageUploads\maxresdefault.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -404,7 +413,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ImageUploads\" />
     <Folder Include="Views\ImageUpload\" />
   </ItemGroup>
   <ItemGroup>
@@ -480,6 +488,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808300350596_add nullable size prop.resx">
       <DependentUpon>201808300350596_add nullable size prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809010348352_adding displays.resx">
+      <DependentUpon>201809010348352_adding displays.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

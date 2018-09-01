@@ -5,59 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>DonationItem</h4>
+    <h4>Donation Item Details</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="col-md-6">
+
         <dt>
-            @Html.DisplayNameFor(model => model.ItemName)
+            Name
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ItemName)
         </dd>
 
+        @if (Model.ItemQuantity != 0)
+        {
+            <dt>
+                Quantity
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ItemQuantity)
+            </dd>
+        }
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.ItemQuantity)
+            Category
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ItemQuantity)
+            @ViewBag.CategoryName
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </dt>
+        @if (Model.ItemSize != null)
+        {
+            <dt>
+                Size
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ItemSize)
+            </dd>
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ItemSize)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ItemSize)
-        </dd>
+        @if (Model.ItemDescription != null)
+        {
+            <dt>
+                Description
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ItemDescription)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ItemDescription)
+            </dd>
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.ItemDescription)
-        </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.RequestingOrganizationId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.RequestingOrganizationId)
-        </dd>
+        </dd>*@
 
         @*<dt>
             @Html.DisplayNameFor(model => model.MyProperty)
@@ -68,8 +79,35 @@
         </dd>*@
 
     </dl>
+    <dl class="col-md-6">
+        @if (Model.ImageFilePath != null)
+        {
+            @*<dt>
+                @Html.DisplayNameFor(model => model.ImageFilePath)
+            </dt>*@
+
+            <dd>
+                <div class="img-fluid">
+                    <img src=@Url.Content(Model.ImageFilePath) style="overflow: hidden; position: relative; width:200px;" />
+                </div>
+            </dd>
+        }
+    </dl>
+
+   
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    @if (User.IsInRole("Organization"))
+    {
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
+        @Html.ActionLink("Back to List", "Index", new { id = Model.RequestingOrganizationId }) |
+        @Html.ActionLink("Add Another Item", "Create", "DonationItems", null, new { id = Model.RequestingOrganizationId })
+
+    </p>
+    }
+    @if (!User.IsInRole("Organization"))
+    {
+        @Html.ActionLink("Back to List", "Index", new { id = Model.RequestingOrganizationId})
+    }
+
+

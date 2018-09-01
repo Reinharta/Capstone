@@ -13,14 +13,18 @@ namespace Capstone.Models
         public int ItemId { get; set; }
 
         [Required]
+        [Display(Name = "Name")]
         public string ItemName { get; set; }
 
+        [Display(Name = "Quantity")]
         public int? ItemQuantity { get; set; }
 
+        [Display(Name = "Size")]
         public string ItemSize { get; set; }
 
         [Required]
         [ForeignKey("Category")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public ItemCategory Category { get; set; }
 
@@ -28,7 +32,7 @@ namespace Capstone.Models
 
         public string Color { get; set; }
 
-        [Required]
+        [Display(Name = "Description")]
         public string ItemDescription { get; set; }
 
         [NotMapped]

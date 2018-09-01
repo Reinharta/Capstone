@@ -11,6 +11,7 @@ namespace Capstone.Models
         [Key]
         public int CategoryId { get; set; }
 
+        [Display(Name = "Category")]
         public string Name { get; set; }
     }
 }

@@ -17,10 +17,20 @@ namespace Capstone.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DonationItems
-        public ActionResult Index()
+        public ActionResult Index(int organizationId)
         {
-            var donationItem = db.DonationItem.Include(d => d.Category);
-            return View(donationItem.ToList());
+            var organization = db.NonprofitOrganizations.Find(organizationId);
+            OrgRequestItemsListViewModel viewModel = new OrgRequestItemsListViewModel()
+            {
+                OrganizationId = organizationId,
+                OrganizationDescription = organization.OrganizationDescription,
+                OrganizationName = organization.OrganizationName,
+                ItemsList = db.DonationItem.Include(d => d.Category).Where(c => c.RequestingOrganizationId == organization.OrganizationId)
+            };
+
+
+            
+            return View(viewModel);
         }
 
         // GET: DonationItems/Details/5
@@ -31,6 +41,7 @@ namespace Capstone.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DonationItem donationItem = db.DonationItem.Find(id);
+            ViewBag.CategoryName = db.ItemCategories.Find(donationItem.CategoryId).Name;
             if (donationItem == null)
             {
                 return HttpNotFound();
@@ -77,7 +88,7 @@ namespace Capstone.Controllers
 
                 if (vm.ImageUpload != null && vm.ImageUpload.ContentLength > 0)
                 {
-                    var uploadDir = "~/Content";
+                    var uploadDir = "~/Content/ImageUploads";
                     var imagePath = Path.Combine(Server.MapPath("~/Content/ImageUploads"), vm.ImageUpload.FileName);
                     var imageUrl = Path.Combine(uploadDir, vm.ImageUpload.FileName);
                     vm.ImageUpload.SaveAs(imagePath);
@@ -87,7 +98,7 @@ namespace Capstone.Controllers
 
                 db.DonationItem.Add(item);
                 db.SaveChanges();
-                return RedirectToAction("Details", item.ItemId);
+                return RedirectToAction("Details", new { id = item.ItemId });
             }
 
             
@@ -115,10 +126,19 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemId,ItemName,ItemQuantity,ItemSize,CategoryId,ItemDescription,RequestingOrganizationId,MyProperty")] DonationItem donationItem)
+        public ActionResult Edit([Bind(Include = "ItemId,ItemName,ItemQuantity,ItemSize,CategoryId,Brand,Color,ItemDescription,OrganizationId,Organization,ImageUpload")] DonationItem donationItem)
         {
             if (ModelState.IsValid)
             {
+                if (donationItem.ImageUpload != null && donationItem.ImageUpload.ContentLength > 0)
+                {
+                    var uploadDir = "~/Content/ImageUploads";
+                    var imagePath = Path.Combine(Server.MapPath("~/Content/ImageUploads"), donationItem.ImageUpload.FileName);
+                    var imageUrl = Path.Combine(uploadDir, donationItem.ImageUpload.FileName);
+                    donationItem.ImageUpload.SaveAs(imagePath);
+                    donationItem.ImageFilePath = imageUrl;
+                }
+
                 db.Entry(donationItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
