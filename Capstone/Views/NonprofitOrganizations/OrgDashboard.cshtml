@@ -9,7 +9,7 @@
 <h2>Dashboard</h2>
 @if (Model.Active == false)
 {
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color:lightgoldenrodyellow">
         <h1 class="display-3">Inactive Account</h1>
         <br />
         <p class="lead">Bummer! Your account isn't active yet. Make sure you've submitted your documents and check back frequently!</p>
@@ -30,7 +30,7 @@
 }
 @if (Model.Active == true && Model.RegistrationCompleted == false)
 {
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color:lightgoldenrodyellow">
         <h2 class="display-4">Hey! <br />Your account has been activated!</h2>
         <p class="lead">Welcome! We're glad you're here!</p>
         <hr class="my-4">
@@ -90,39 +90,39 @@
 
     <hr />
     <div>
+        <div class="col-md-12">
+            <h3>Contact Information</h3>
+            <small>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
+                @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+            </small>
+        </div>
+        <div class="col-md-12 mt-4">
+            <h4>@Model.OrganizationName</h4>
 
-        <h3>Contact Information</h3>
-        <h4>@Model.OrganizationName</h4>
-
-        @if (Model.OrganizationPhone != null)
-        {
-            <p>
-                @String.Format("({0}) {1}-{2}"
-                     , Model.OrganizationPhone.Substring(0, 3)
-                     , Model.OrganizationPhone.Substring(3, 3)
-                     , Model.OrganizationPhone.Substring(6, Model.OrganizationPhone.Length - 6))
-            </p>
-        }
-        @if (Model.OrganizationPhone == null)
-        {
-            <p style="color: maroon">No Phone Number Saved</p>
-        }
-        @Html.DisplayFor(m => m.User.Email)
-        <br />
-        @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
-        @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
-    </div>
+            @String.Format("({0}) {1}-{2}"
+                 , Model.OrganizationPhone.Substring(0, 3)
+                 , Model.OrganizationPhone.Substring(3, 3)
+                 , Model.OrganizationPhone.Substring(6, Model.OrganizationPhone.Length - 6))<br />
+            @Html.DisplayFor(m => m.OrganizationWebsite)<br />
+            @Html.DisplayFor(m => m.User.Email)
+            <br />
+            </div>
+        </div>
     <hr />
     <div class="row">
         <div class="col-md-12">
             <h3>Address Book</h3>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
-            @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+            <small>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
+                @Html.ActionLink("Details", "Details", new { id = Model.OrganizationId })
+            </small>
         </div>
         <div class="col-sm-6 mt-4">
             <h5>Shipping Address:</h5>
             @if (Model.ShippingAddress != null)
             {<p>
+                    @Model.ShipAddress.ContactPerson<br />
                     @Model.ShipAddress.StreetAddress<br />
                     @Model.ShipAddress.City, @Model.ShipAddress.State @Model.ShipAddress.Zipcode
                 </p>
@@ -137,6 +137,7 @@
             @if (Model.DropOffAddress != null)
             {
                 <p>
+                    @Model.DropAddress.ContactPerson<br />
                     @Model.DropAddress.StreetAddress<br />
                     @Model.DropAddress.City, @Model.DropAddress.State @Model.DropAddress.Zipcode
                 </p>

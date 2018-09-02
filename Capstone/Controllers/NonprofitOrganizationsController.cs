@@ -54,9 +54,28 @@ namespace Capstone.Controllers
         }
 
         // GET: NonprofitOrganizations
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string category)
         {
             var nonprofitOrganizations = db.NonprofitOrganizations.Include(d => d.ShipAddress).Include(d => d.DropAddress);
+
+            if (!String.IsNullOrEmpty(category) && !String.IsNullOrEmpty(searchString))
+            {
+                int categoryId = Int32.Parse(category);
+                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.CategoryId == categoryId && c.DropAddress.Zipcode.Contains(searchString) || c.ShipAddress.Zipcode.Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(category))
+            {
+                int categoryId = Int32.Parse(category);
+                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.CategoryId == categoryId);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                nonprofitOrganizations = nonprofitOrganizations.Where(s => s.DropAddress.Zipcode.Contains(searchString) || s.ShipAddress.Zipcode.Contains(searchString));                
+            }
+
+            ViewBag.Categories = db.OrganizationCategories.Distinct();
             return View(nonprofitOrganizations.ToList());
         }
 
@@ -156,7 +175,9 @@ namespace Capstone.Controllers
 
             FinishRegistrationViewModel viewModel = new FinishRegistrationViewModel() {
                 OrganizationId = organization.OrganizationId,
-                OrganizationName = organization.OrganizationName
+                OrganizationName = organization.OrganizationName,
+                PhoneNumber = organization.OrganizationPhone,
+                OrganizationWebsite = organization.OrganizationWebsite,
             };
             return View(viewModel);
         }
@@ -178,8 +199,6 @@ namespace Capstone.Controllers
 
                 organization.DropAddress = db.Addresses.Where(c => c.AddressId == dropAddId).First();
                 organization.ShipAddress = db.Addresses.Where(c => c.AddressId == shipAddId).First();
-                organization.OrganizationPhone = newOrganizationInfo.PhoneNumber;
-                organization.OrganizationWebsite = newOrganizationInfo.OrganizationWebsite;
                 organization.OrganizationDescription = newOrganizationInfo.OrganizationDescription;
                 organization.RegistrationCompleted = true;
 
