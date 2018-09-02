@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DonationBasketsController.cs" />
     <Compile Include="Controllers\DonationItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageUploadController.cs" />
@@ -293,10 +294,19 @@
     <Compile Include="Migrations\201809010348352_adding displays.Designer.cs">
       <DependentUpon>201809010348352_adding displays.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809022139057_alter donationItem.cs" />
+    <Compile Include="Migrations\201809022139057_alter donationItem.Designer.cs">
+      <DependentUpon>201809022139057_alter donationItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809022154348_Adding DonationBasket, updating cartItem.cs" />
+    <Compile Include="Migrations\201809022154348_Adding DonationBasket, updating cartItem.Designer.cs">
+      <DependentUpon>201809022154348_Adding DonationBasket, updating cartItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\DonationBasket.cs" />
     <Compile Include="Models\ImageUpload.cs" />
     <Compile Include="Models\ItemCategory.cs" />
     <Compile Include="Models\DonationItem.cs" />
@@ -410,6 +420,11 @@
     <Content Include="Views\DonationItems\Details.cshtml" />
     <Content Include="Views\DonationItems\Edit.cshtml" />
     <Content Include="Views\DonationItems\Index.cshtml" />
+    <Content Include="Views\DonationBaskets\Create.cshtml" />
+    <Content Include="Views\DonationBaskets\Delete.cshtml" />
+    <Content Include="Views\DonationBaskets\Details.cshtml" />
+    <Content Include="Views\DonationBaskets\Edit.cshtml" />
+    <Content Include="Views\DonationBaskets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -491,6 +506,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809010348352_adding displays.resx">
       <DependentUpon>201809010348352_adding displays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809022139057_alter donationItem.resx">
+      <DependentUpon>201809022139057_alter donationItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809022154348_Adding DonationBasket, updating cartItem.resx">
+      <DependentUpon>201809022154348_Adding DonationBasket, updating cartItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

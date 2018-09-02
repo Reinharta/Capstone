@@ -28,6 +28,9 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.ItemQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="small text-danger">
+            *Required
+        </div>
         <div class="col-md-10">
             @Html.EditorFor(model => model.ItemQuantity, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ItemQuantity, "", new { @class = "text-danger" })

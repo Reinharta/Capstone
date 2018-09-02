@@ -55,5 +55,6 @@ namespace Capstone.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<Capstone.Models.DonationBasket> DonationBaskets { get; set; }
     }
 }

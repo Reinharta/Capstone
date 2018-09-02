@@ -16,8 +16,9 @@ namespace Capstone.Models
         [Display(Name = "Name")]
         public string ItemName { get; set; }
 
+        [Required]
         [Display(Name = "Quantity")]
-        public int? ItemQuantity { get; set; }
+        public int ItemQuantity { get; set; }
 
         [Display(Name = "Size")]
         public string ItemSize { get; set; }
