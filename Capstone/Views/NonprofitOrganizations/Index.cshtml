@@ -54,7 +54,7 @@
             </td>
             <td>
                 @Html.ActionLink("Organization Details", "OrganizationProfile", new { organizationId = item.OrganizationId }) |
-                @Html.ActionLink("Donation Requests", "Index", "DonationItems", new { id = item.OrganizationId }, null)
+                @Html.ActionLink("Donation Requests", "Index", "DonationItems", new { organizationId = item.OrganizationId }, null)
             </td>
         </tr>
     }

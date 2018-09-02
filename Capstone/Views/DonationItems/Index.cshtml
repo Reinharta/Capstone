@@ -8,7 +8,16 @@
 <h1 class="text-center">@Model.OrganizationName</h1>
 <hr />
 <h6 class="text-center">@Model.OrganizationDescription</h6>
-<hr/>
+<hr />
+
+@using (Html.BeginForm())
+{
+<div>
+    @Html.Hidden("organizationId", Model.OrganizationId)
+    Category: @Html.DropDownList("categoryId", new SelectList(ViewBag.Categories, "CategoryId", "Name"), "All", null)
+    <input type="submit" value="Search" class="btn-primary" />
+</div>
+}
 
 @if (User.IsInRole("Organization"))
 {
@@ -31,6 +40,9 @@
         <th>
             Quantity
         </th>
+        <th>
+            Category
+        </th>
         <th></th>
     </tr>
 
@@ -48,6 +60,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ItemQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
 
             @if (User.IsInRole("Organization"))
