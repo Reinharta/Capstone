@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
+using Capstone.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Capstone.Controllers
 {
@@ -39,8 +41,8 @@ namespace Capstone.Controllers
         // GET: Supporters/Create
         public ActionResult Create()
         {
-            ViewBag.SupporterAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson");
-            return View();
+            CreateSupporterViewModel viewModel = new CreateSupporterViewModel();
+            return View(viewModel);
         }
 
         // POST: Supporters/Create
@@ -48,17 +50,43 @@ namespace Capstone.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SupporterId,FullName,Email,SupporterAddress")] Supporter supporter)
+        public ActionResult Create([Bind(Include = "FullName,StreetAddress,City,State,Zipcode")] CreateSupporterViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Where(c => c.Id == userId).First();
+                user.UserRole = "Supporter";
+                Supporter supporter = new Supporter()
+                {
+                    FullName = viewModel.FullName,
+                    Email = user.Email,
+                    SupporterAddress = AddAddressGetId(viewModel),
+                    UserId = userId
+                };
+
                 db.Supporters.Add(supporter);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.SupporterAddress = new SelectList(db.Addresses, "AddressId", "ContactPerson", supporter.SupporterAddress);
-            return View(supporter);
+            return View(viewModel);
+        }
+
+        public int AddAddressGetId (CreateSupporterViewModel viewModel)
+        {
+            Address newAddress = new Address()
+            {
+                ContactPerson = viewModel.FullName,
+                StreetAddress = viewModel.StreetAddress,
+                City = viewModel.City,
+                State = viewModel.State,
+                Zipcode = viewModel.Zipcode
+            };
+
+            db.Addresses.Add(newAddress);
+            db.SaveChanges();
+            return newAddress.AddressId;
         }
 
         // GET: Supporters/Edit/5

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
 using Capstone.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Capstone.Controllers
 {
@@ -20,6 +21,12 @@ namespace Capstone.Controllers
         public ActionResult Index(int organizationId, int? categoryId, int? supporterId)
         {
             var organization = db.NonprofitOrganizations.Find(organizationId);
+            if (supporterId == null)
+            {
+                var userId = User.Identity.GetUserId();
+                supporterId = db.Supporters.Where(c => c.UserId == userId).First().SupporterId;
+            }
+
             OrgRequestItemsListViewModel viewModel = new OrgRequestItemsListViewModel()
             {
                 SupporterId = supporterId,

@@ -36,6 +36,9 @@ namespace Capstone.Controllers
                 Quantity = quantity
             };
 
+            db.CartItem.Add(item);
+            db.SaveChanges();
+
             return RedirectToAction("AddToBasket", "DonationBaskets", item);
         }
 

@@ -24,5 +24,9 @@ namespace Capstone.Models
         public int? SupporterAddress { get; set; }
         [Display(Name = "Address")]
         public Address Address { get; set; }
+
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

@@ -307,6 +307,10 @@
     <Compile Include="Migrations\201809030753253_donationbasket.Designer.cs">
       <DependentUpon>201809030753253_donationbasket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809032153209_updated Supporter model.cs" />
+    <Compile Include="Migrations\201809032153209_updated Supporter model.Designer.cs">
+      <DependentUpon>201809032153209_updated Supporter model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -522,6 +526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809030753253_donationbasket.resx">
       <DependentUpon>201809030753253_donationbasket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809032153209_updated Supporter model.resx">
+      <DependentUpon>201809032153209_updated Supporter model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
