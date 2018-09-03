@@ -15,26 +15,40 @@ namespace Capstone.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DonationBaskets
-        public ActionResult Index()
+        public ActionResult Index(int supporterId, int organizationId)
         {
-            var donationBasket = db.DonationBaskets.Include(d => d.Organization).Include(d => d.Supporter);
-            return View(donationBasket.ToList());
+            var donationBasket = db.DonationBaskets.Include(d => d.Organization).Include(d => d.Supporter).Where(c => c.SupporterId == supporterId);
+
+            if(donationBasket == null)
+            {
+                DonationBasket newBasket = new DonationBasket()
+                {
+                    SupporterId = supporterId,
+                    Supporter = db.Supporters.Where(c => c.SupporterId == supporterId).First(),
+                    OrganizationId = organizationId,
+                    Organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).First(),
+                    DateCreated = System.DateTime.Today
+                };
+                return View(newBasket);
+            }
+
+            return View(donationBasket);
         }
 
         // GET: DonationBaskets/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DonationBasket donationBasket = db.DonationBaskets.Find(id);
-            if (donationBasket == null)
-            {
-                return HttpNotFound();
-            }
-            return View(donationBasket);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    DonationBasket donationBasket = db.DonationBaskets.Find(id);
+        //    if (donationBasket == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(donationBasket);
+        //}
 
         // GET: DonationBaskets/Create
         public ActionResult Create()
