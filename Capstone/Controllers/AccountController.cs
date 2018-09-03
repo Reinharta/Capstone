@@ -192,6 +192,11 @@ namespace Capstone.Controllers
         [AllowAnonymous]
         public ActionResult RegisterSupporter()
         {
+            RegisterSupporterViewModel viewModel = new RegisterSupporterViewModel()
+            {
+                UserRole = "Supporter",
+            };
+
             return View();
         }
 

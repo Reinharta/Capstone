@@ -94,29 +94,29 @@ namespace Capstone.Controllers
             return View(nonprofitOrganization);
         }
 
-        [ValidateAntiForgeryToken]
-        public ActionResult PreCreate(ApplicationUser user)
-        {
-            var organization = new NonprofitOrganization()
-            {
-                OrganizationName = user.OrganizationName,
-                UserId = user.Id,
-                User = user,
-                Active = false,
-                RegistrationCompleted = false,
-                ShipAddress = null,
-                DropAddress = null
-            };
+        //[ValidateAntiForgeryToken]
+        //public ActionResult PreCreate(ApplicationUser user)
+        //{
+        //    var organization = new NonprofitOrganization()
+        //    {
+        //        OrganizationName = user.OrganizationName,
+        //        UserId = user.Id,
+        //        User = user,
+        //        Active = false,
+        //        RegistrationCompleted = false,
+        //        ShipAddress = null,
+        //        DropAddress = null
+        //    };
 
-            if (ModelState.IsValid)
-            {
-                db.NonprofitOrganizations.Add(organization);
-                db.SaveChanges(); //THROWING EXCEPTION HERE
-                return View("RegistrationLanding");
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.NonprofitOrganizations.Add(organization);
+        //        db.SaveChanges(); //THROWING EXCEPTION HERE
+        //        return View("RegistrationLanding");
+        //    }
 
-            return View("RegisterOrganization", "Account", organization);
-        }
+        //    return View("RegisterOrganization", "Account", organization);
+        //}
 
         // GET: NonprofitOrganizations/Create
         public ActionResult Create()
