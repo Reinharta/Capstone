@@ -17,11 +17,12 @@ namespace Capstone.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DonationItems
-        public ActionResult Index(int organizationId, int? categoryId)
+        public ActionResult Index(int organizationId, int? categoryId, int? supporterId)
         {
             var organization = db.NonprofitOrganizations.Find(organizationId);
             OrgRequestItemsListViewModel viewModel = new OrgRequestItemsListViewModel()
             {
+                SupporterId = supporterId,
                 OrganizationId = organizationId,
                 OrganizationDescription = organization.OrganizationDescription,
                 OrganizationName = organization.OrganizationName,
@@ -36,6 +37,12 @@ namespace Capstone.Controllers
                 viewModel.ItemsList = db.DonationItem.Include(d => d.Category).Where(c => c.RequestingOrganizationId == organization.OrganizationId);
             }
             ViewBag.Categories = db.ItemCategories.Distinct();
+
+            var list = new List<SelectListItem>();
+            for (var i = 1; i < 51; i++)
+                list.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
+            ViewBag.QuantityList = list;
+
             return View(viewModel);
         }
 

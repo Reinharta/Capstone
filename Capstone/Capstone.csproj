@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartItemsController.cs" />
     <Compile Include="Controllers\DonationBasketsController.cs" />
     <Compile Include="Controllers\DonationItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -301,6 +302,10 @@
     <Compile Include="Migrations\201809022154348_Adding DonationBasket, updating cartItem.cs" />
     <Compile Include="Migrations\201809022154348_Adding DonationBasket, updating cartItem.Designer.cs">
       <DependentUpon>201809022154348_Adding DonationBasket, updating cartItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809030753253_donationbasket.cs" />
+    <Compile Include="Migrations\201809030753253_donationbasket.Designer.cs">
+      <DependentUpon>201809030753253_donationbasket.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -428,6 +433,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CartItems\" />
     <Folder Include="Views\ImageUpload\" />
   </ItemGroup>
   <ItemGroup>
@@ -512,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809022154348_Adding DonationBasket, updating cartItem.resx">
       <DependentUpon>201809022154348_Adding DonationBasket, updating cartItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809030753253_donationbasket.resx">
+      <DependentUpon>201809030753253_donationbasket.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -13,6 +13,8 @@ namespace Capstone.ViewModels
 
         public string OrganizationDescription { get; set; }
 
+        public int? SupporterId { get; set; }
+
         public IEnumerable<DonationItem> ItemsList { get; set; }
       
     }

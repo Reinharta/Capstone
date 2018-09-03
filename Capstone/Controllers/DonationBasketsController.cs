@@ -17,24 +17,55 @@ namespace Capstone.Controllers
         // GET: DonationBaskets
         public ActionResult Index(int supporterId, int organizationId)
         {
-            var donationBasket = db.DonationBaskets.Include(d => d.Organization).Include(d => d.Supporter).Where(c => c.SupporterId == supporterId);
-
-            if(donationBasket == null)
+            if (!db.DonationBaskets.Any(c => c.SupporterId == supporterId))
             {
-                DonationBasket newBasket = new DonationBasket()
-                {
-                    SupporterId = supporterId,
-                    Supporter = db.Supporters.Where(c => c.SupporterId == supporterId).First(),
-                    OrganizationId = organizationId,
-                    Organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).First(),
-                    DateCreated = System.DateTime.Today
-                };
-                return View(newBasket);
+                CreateBasket(organizationId, supporterId);
             }
 
+            var donationBasket = db.DonationBaskets.Include(d => d.BasketItems).Include(d => d.Organization).Include(d => d.Supporter).Where(c => c.SupporterId == supporterId);
+         
             return View(donationBasket);
         }
 
+        public ActionResult AddToBasket(CartItem cartItem)
+        {
+            var supporter = db.Supporters.Where(c => c.SupporterId == cartItem.SupporterId).First();
+            DonationBasket basket = null;
+
+            if (!db.DonationBaskets.Any(c => c.SupporterId == supporter.SupporterId))
+            {
+                basket = CreateBasket(cartItem.Product.RequestingOrganizationId, supporter.SupporterId);
+            }
+            if (db.DonationBaskets.Any(c => c.SupporterId == supporter.SupporterId))
+            {
+                basket = db.DonationBaskets.Where(c => c.SupporterId == supporter.SupporterId).First();
+            }
+
+            var list = basket.BasketItems;
+            list.Add(cartItem);
+            db.Entry(basket).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Index(basket.SupporterId, basket.OrganizationId);
+        }
+
+
+        public DonationBasket CreateBasket(int organizationId, int supporterId)
+        {
+            DonationBasket newBasket = new DonationBasket()
+            {
+                SupporterId = supporterId,
+                OrganizationId = organizationId,
+                DateCreated = System.DateTime.Today,
+
+            };
+            
+                db.DonationBaskets.Add(newBasket);
+                db.SaveChanges();
+            
+
+            return newBasket;
+        }
         // GET: DonationBaskets/Details/5
         //public ActionResult Details(int? id)
         //{

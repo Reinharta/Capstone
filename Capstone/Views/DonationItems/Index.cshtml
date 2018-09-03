@@ -38,50 +38,66 @@
             Color
         </th>
         <th>
-            Quantity
+            Quantity Needed
         </th>
         <th>
             Category
         </th>
         <th></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model.ItemsList)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
 
-            @if (User.IsInRole("Organization"))
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ItemId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemId })
-                </td>
-            }
-            @if (!User.IsInRole("Organization"))
-            {
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ItemId })
-                </td>
-            }
+        @if (User.IsInRole("Organization"))
+        {
+            <td></td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemId })
+            </td>
+        }
+        @if (!User.IsInRole("Supporter"))
+        {
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ItemId })
+            </td>
+            <td>
+                
+                @using (Html.BeginForm("Create", "CartItems", new { enctype = "multipart/form-data" }))
+                {
+                    <div>
+                        @Html.Hidden("donationItemId", item.ItemId)
+                        @Html.Hidden("supporterId", Model.SupporterId)
+                        Quantity: @Html.DropDownList("quantity", new SelectList(ViewBag.QuantityList, "Text", "Value"), " ", null)
+                        <input type="submit" value="Add To Basket" />
+                    </div>
+                }
+            </td>
+        }
 
 
-        </tr>
+    </tr>
     }
 
 </table>
