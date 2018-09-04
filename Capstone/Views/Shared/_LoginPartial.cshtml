@@ -5,12 +5,20 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+<ul class="nav navbar-nav navbar-right">
+    @if (User.IsInRole("Supporter"))
+    {
+        <li class="nav-item float-lg-right">
+            <a class="nav-link float-right" href="@Url.Action("SupporterIndex", "DonationBaskets")">
+                Donation Baskets
+            </a>
         </li>
-        <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+    }
+    <li>
+        @Html.ActionLink("Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+    </li>
+    <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
     }
 }
 else

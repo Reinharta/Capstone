@@ -334,6 +334,7 @@
     <Compile Include="ViewModels\OrganizationProfileViewModel.cs" />
     <Compile Include="ViewModels\OrgDashboardViewModel.cs" />
     <Compile Include="ViewModels\OrgRequestItemsListViewModel.cs" />
+    <Compile Include="ViewModels\SuppporterBasketIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-mintyTheme.css" />
@@ -435,6 +436,7 @@
     <Content Include="Views\DonationBaskets\Details.cshtml" />
     <Content Include="Views\DonationBaskets\Edit.cshtml" />
     <Content Include="Views\DonationBaskets\Index.cshtml" />
+    <Content Include="Views\DonationBaskets\SupporterIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

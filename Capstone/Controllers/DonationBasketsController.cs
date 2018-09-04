@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Capstone.Models;
+using Microsoft.AspNet.Identity;
+using Capstone.ViewModels;
 
 namespace Capstone.Controllers
 {
@@ -17,7 +19,7 @@ namespace Capstone.Controllers
         // GET: DonationBaskets
         public ActionResult Index(int supporterId, int organizationId)
         {
-            if (!db.DonationBaskets.Any(c => c.SupporterId == supporterId))
+            if (!db.DonationBaskets.Any(c => c.SupporterId == supporterId && c.OrganizationId == organizationId))
             {
                 CreateBasket(organizationId, supporterId);
             }
@@ -25,6 +27,21 @@ namespace Capstone.Controllers
             var donationBasket = db.DonationBaskets.Include(d => d.BasketItems).Include(d => d.Organization).Include(d => d.Supporter).Where(c => c.SupporterId == supporterId);
          
             return View(donationBasket);
+        }
+
+        public ActionResult SupporterIndex()
+        {
+            var userId = User.Identity.GetUserId();
+            var supporter = db.Supporters.Where(c => c.UserId == userId).First();
+
+            var viewModel = new SuppporterBasketIndexViewModel()
+            {
+                SupporterId = supporter.SupporterId,
+                Supporter = supporter,
+                BasketsList = db.DonationBaskets.Include(d => d.Organization).Include(d => d.Supporter).Include(d => d.BasketItems).Where(c => c.SupporterId == supporter.SupporterId).ToList()
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult AddToBasket(CartItem cartItem)

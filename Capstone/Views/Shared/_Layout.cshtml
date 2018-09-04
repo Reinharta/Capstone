@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
 
 </head>
 <body>
@@ -27,6 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Index", "NonprofitOrganizations", null)">Find Organizations</a>
                 </li>
+                
                 @if (User.IsInRole("Organization"))
                 {
                     <li class="nav-item">
