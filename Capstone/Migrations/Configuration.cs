@@ -18,14 +18,14 @@ namespace Capstone.Migrations
         protected override void Seed(Capstone.Models.ApplicationDbContext context)
         {
             ////ADDING ADMIN HERE//
-            //if (!(context.Users.Any(u => u.UserName == "admin@email.com")))
-            //{
-            //    var userStore = new UserStore<ApplicationUser>(context);
-            //    var userManager = new UserManager<ApplicationUser>(userStore);
-            //    var userToInsert = new ApplicationUser { UserName = "admin@email.com", PhoneNumber = "12345678911", Email = "admin@email.com", UserRole = "Admin" };
-            //    userManager.Create(userToInsert, "Password1!");
-            //    userManager.AddToRole(userToInsert.Id, userToInsert.UserRole);
-            //}
+            if (!(context.Users.Any(u => u.UserName == "admin@email.com")))
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var userToInsert = new ApplicationUser { UserName = "admin@email.com", PhoneNumber = "12345678911", Email = "admin@email.com", UserRole = "Admin" };
+                userManager.Create(userToInsert, "Password1!");
+                userManager.AddToRole(userToInsert.Id, userToInsert.UserRole);
+            }
 
 
             ///SEEDING ORG CATEGORIES
@@ -50,7 +50,34 @@ namespace Capstone.Migrations
                 new ItemCategory() { Name = "Other"}
                 );
 
+            //context.CartItem.AddOrUpdate(x => x.BasketId,
+            //    new CartItem()
+            //    {
+            //        SupporterId = 4,
+            //        DateCreated = DateTime.Today,
+            //        ProductId = 9,
+            //        Quantity = 2
+            //    },
+            //    new CartItem()
+            //    {
+            //        SupporterId = 4,
+            //        DateCreated = DateTime.Today,
+            //        ProductId = 10,
+            //        Quantity = 12
+            //    }             
+            //);
 
+            //context.DonationBaskets.AddOrUpdate(x => x.BasketId,
+            //    new DonationBasket()
+            //    {
+            //        SupporterId = 4,
+            //        OrganizationId = 65,
+            //        DateCreated = DateTime.Today,
+            //        BasketPending = false,
+            //        Received = false,
+                    
+            //    }
+            //);
 
 
 

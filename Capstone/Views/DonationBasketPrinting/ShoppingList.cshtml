@@ -1,0 +1,54 @@
+﻿@model Capstone.Models.DonationBasket
+
+@{
+    ViewBag.Title = "ShoppingList";
+    Layout = "~/Views/Shared/PrintLayout.cshtml";
+}
+<div class="text-center">
+    <h2>Shopping List</h2>
+    <h4>Donations For @ViewBag.OrganizationName</h4>
+</div>
+
+<br/>
+<br/>
+<table class="table">
+    <tr>
+        <th>
+            Item Name
+        </th>
+        <th>
+            Size
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Color
+        </th>
+        <th>
+            Quantity
+        </th>
+    </tr>
+
+    @foreach (var item in ViewBag.ItemsList)
+    {
+        <tr>
+            <td>
+                @item.Product.ItemName
+            </td>
+            <td>
+                @item.Product.ItemSize
+            </td>
+            <td>
+                @item.Product.Brand
+            </td>
+            <td>
+                @item.Product.Color
+            </td>
+            <td>
+                @item.Quantity
+            </td>
+        </tr>
+    }
+
+</table>

@@ -100,14 +100,14 @@
     {
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ItemId }) |
-        @Html.ActionLink("Back to List", "Index", new { id = Model.RequestingOrganizationId }) |
-        @Html.ActionLink("Add Another Item", "Create", "DonationItems", null, new { id = Model.RequestingOrganizationId })
+        @Html.ActionLink("Back to List", "Index", new { organizationId = Model.RequestingOrganizationId }) |
+        @Html.ActionLink("Add Another Item", "Create", "DonationItems", new { organizationId = Model.RequestingOrganizationId }, null)
 
     </p>
     }
     @if (!User.IsInRole("Organization"))
     {
-        @Html.ActionLink("Back to List", "Index", new { id = Model.RequestingOrganizationId})
+        @Html.ActionLink("Back to List", "Index", new { organizationId = Model.RequestingOrganizationId})
     }
 
 

@@ -15,6 +15,8 @@ namespace Capstone.ViewModels
 
         public int? SupporterId { get; set; }
 
+        public string UserRole { get; set; }
+
         public IEnumerable<DonationItem> ItemsList { get; set; }
       
     }

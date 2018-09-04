@@ -43,6 +43,7 @@ namespace Capstone.Models
         public DbSet<OrganizationCategory> OrganizationCategories { get; set; }
         public DbSet<ItemCategory> ItemCategories { get; set; }
         public DbSet<ImageUpload> ImageUploads { get; set; }
+        public DbSet<DonationBasket> DonationBaskets { get; set; }
 
 
         public ApplicationDbContext()
@@ -54,7 +55,6 @@ namespace Capstone.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<Capstone.Models.DonationBasket> DonationBaskets { get; set; }
+        
     }
 }

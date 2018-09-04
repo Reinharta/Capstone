@@ -49,6 +49,9 @@
       <HintPath>..\packages\GoogleMaps.LocationServices.1.2.0.1\lib\net40\GoogleMaps.LocationServices.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -201,6 +204,7 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartItemsController.cs" />
+    <Compile Include="Controllers\DonationBasketPrintingController.cs" />
     <Compile Include="Controllers\DonationBasketsController.cs" />
     <Compile Include="Controllers\DonationItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -311,6 +315,30 @@
     <Compile Include="Migrations\201809032153209_updated Supporter model.Designer.cs">
       <DependentUpon>201809032153209_updated Supporter model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809040120116_yeah.cs" />
+    <Compile Include="Migrations\201809040120116_yeah.Designer.cs">
+      <DependentUpon>201809040120116_yeah.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809040230381_fixing cartitem model.cs" />
+    <Compile Include="Migrations\201809040230381_fixing cartitem model.Designer.cs">
+      <DependentUpon>201809040230381_fixing cartitem model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809040235344_db generated key cartitem.cs" />
+    <Compile Include="Migrations\201809040235344_db generated key cartitem.Designer.cs">
+      <DependentUpon>201809040235344_db generated key cartitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809040246156_again with this.cs" />
+    <Compile Include="Migrations\201809040246156_again with this.Designer.cs">
+      <DependentUpon>201809040246156_again with this.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809040257487_trying another thing.cs" />
+    <Compile Include="Migrations\201809040257487_trying another thing.Designer.cs">
+      <DependentUpon>201809040257487_trying another thing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809040411317_id.cs" />
+    <Compile Include="Migrations\201809040411317_id.Designer.cs">
+      <DependentUpon>201809040411317_id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -354,10 +382,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="GoogleMaps.LocationServices.readme.txt" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -437,6 +470,8 @@
     <Content Include="Views\DonationBaskets\Edit.cshtml" />
     <Content Include="Views\DonationBaskets\Index.cshtml" />
     <Content Include="Views\DonationBaskets\SupporterIndex.cshtml" />
+    <Content Include="Views\DonationBasketPrinting\ShoppingList.cshtml" />
+    <Content Include="Views\Shared\PrintLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -531,6 +566,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809032153209_updated Supporter model.resx">
       <DependentUpon>201809032153209_updated Supporter model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809040120116_yeah.resx">
+      <DependentUpon>201809040120116_yeah.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809040230381_fixing cartitem model.resx">
+      <DependentUpon>201809040230381_fixing cartitem model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809040235344_db generated key cartitem.resx">
+      <DependentUpon>201809040235344_db generated key cartitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809040246156_again with this.resx">
+      <DependentUpon>201809040246156_again with this.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809040257487_trying another thing.resx">
+      <DependentUpon>201809040257487_trying another thing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809040411317_id.resx">
+      <DependentUpon>201809040411317_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

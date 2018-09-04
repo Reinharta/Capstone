@@ -24,8 +24,11 @@ namespace Capstone.Controllers
                 CreateBasket(organizationId, supporterId);
             }
 
-            var donationBasket = db.DonationBaskets.Include(d => d.BasketItems).Include(d => d.Organization).Include(d => d.Supporter).Where(c => c.SupporterId == supporterId);
-         
+            var donationBasket = db.DonationBaskets.Include(d => d.BasketItems).Include(d => d.Organization).Include(d => d.Supporter).Where(c => c.SupporterId == supporterId).First();
+            List<CartItem> basketItems = db.CartItem.Include(d => d.Product).Where(d => d.BasketId == donationBasket.BasketId).ToList();
+
+            ViewBag.ItemsList = basketItems;
+            ViewBag.OrganizationName = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).First().OrganizationName;
             return View(donationBasket);
         }
 
@@ -46,24 +49,26 @@ namespace Capstone.Controllers
 
         public ActionResult AddToBasket(CartItem cartItem)
         {
+            cartItem.Product = db.DonationItem.Where(c => c.ItemId == cartItem.ProductId).First();
             var supporter = db.Supporters.Where(c => c.SupporterId == cartItem.SupporterId).First();
             DonationBasket basket = null;
 
-            if (!db.DonationBaskets.Any(c => c.SupporterId == supporter.SupporterId))
+            if (!db.DonationBaskets.Any(c => c.SupporterId == supporter.SupporterId && c.OrganizationId == cartItem.Product.RequestingOrganizationId))
             {
-                basket = CreateBasket(cartItem.Product.RequestingOrganizationId, supporter.SupporterId);
+                var newBasket = CreateBasket(cartItem.Product.RequestingOrganizationId, supporter.SupporterId);
+                basket = newBasket;
             }
-            if (db.DonationBaskets.Any(c => c.SupporterId == supporter.SupporterId))
+            if (db.DonationBaskets.Any(c => c.SupporterId == supporter.SupporterId && c.OrganizationId == cartItem.Product.RequestingOrganizationId))
             {
-                basket = db.DonationBaskets.Where(c => c.SupporterId == supporter.SupporterId).First();
+                basket = db.DonationBaskets.Where(c => c.SupporterId == supporter.SupporterId && c.OrganizationId == cartItem.Product.RequestingOrganizationId).First();
             }
-
-            var list = basket.BasketItems;
-            list.Add(cartItem);
-            db.Entry(basket).State = EntityState.Modified;
+            
+            cartItem.BasketId = basket.BasketId;
+            cartItem.DonationBasket = basket;
+            db.Entry(cartItem).State = EntityState.Modified;
             db.SaveChanges();
-
-            return Index(basket.SupporterId, basket.OrganizationId);
+            
+            return View("Index", new { supporterId = supporter.SupporterId, organizationId = basket.OrganizationId });
         }
 
 

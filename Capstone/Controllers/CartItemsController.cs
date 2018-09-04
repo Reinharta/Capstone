@@ -22,17 +22,18 @@ namespace Capstone.Controllers
             return View();
         }
 
-     
+      
         public ActionResult Create(int donationItemId, int supporterId, int quantity)
         {
             var donationItem = db.DonationItem.Where(c => c.ItemId == donationItemId).First();
+
             CartItem item = new CartItem()
             {
                 SupporterId = supporterId,
                 Supporter = db.Supporters.Where(c => c.SupporterId == supporterId).First(),
                 DateCreated = System.DateTime.Today,
                 ProductId = donationItem.ItemId,
-                Product = db.DonationItem.Where(c => c.ItemId == donationItem.ItemId).First(),
+                Product = donationItem,
                 Quantity = quantity
             };
 

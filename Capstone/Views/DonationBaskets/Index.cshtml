@@ -1,15 +1,15 @@
 ﻿@model Capstone.Models.DonationBasket
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Donation Basket</h2>
+<h3>@ViewBag.OrganizationName</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -30,29 +30,51 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.BasketItems) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.ItemName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.ItemSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Brand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.ItemQuantity)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.BasketItemId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.BasketItemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.BasketItemId })
-        </td>
-    </tr>
-}
+    @foreach (var item in ViewBag.ItemsList)
+    {
+        <tr>
+            <td>
+                @item.Product.ItemName
+            </td>
+            <td>
+                @item.Product.ItemSize
+            </td>
+            <td>
+                @item.Product.Brand
+            </td>
+            <td>
+                @item.Product.Color
+            </td>
+            <td>
+                @item.Quantity
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "CartItems", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "Details", "CartItems", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "CartItems", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
 
 </table>
+
+@if (Model.BasketPending == false && Model.Received == false)
+{
+    
+        @*<a href="@Url.Action("PrintShoppingList", "DonationBasketPrinting", new { id = Model.BasketId })">*@
+            <button type="button" class="btn btn-primary btn-lg" onclick="location.href ='@Url.Action("PrintShoppingList", "DonationBasketPrinting", new { id = Model.BasketId })'">
+                Print Shopping List
+            </button>
+        @*</a>*@
+        
+        
+        
+    
+ }
+
+ @if (Model.BasketPending == true && Model.Received == false)
+ {
+      <button type="button" class="btn btn-primary btn-lg">
+            @Html.ActionLink("Print Packing Slip", "PrintPackingSlip", "DonationBasketPrinting", new { id = Model.BasketId }, null)
+      </button>
+  }

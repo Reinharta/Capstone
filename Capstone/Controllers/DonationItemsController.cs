@@ -21,10 +21,20 @@ namespace Capstone.Controllers
         public ActionResult Index(int organizationId, int? categoryId, int? supporterId)
         {
             var organization = db.NonprofitOrganizations.Find(organizationId);
+            string role = null;
             if (supporterId == null)
             {
                 var userId = User.Identity.GetUserId();
-                supporterId = db.Supporters.Where(c => c.UserId == userId).First().SupporterId;
+                try
+                {
+                    supporterId = db.Supporters.Where(c => c.UserId == userId).First().SupporterId;
+                    role = "Supporter";
+                }
+                catch
+                {
+                    supporterId = null;
+                    role = "Organization";
+                }
             }
 
             OrgRequestItemsListViewModel viewModel = new OrgRequestItemsListViewModel()
@@ -33,6 +43,7 @@ namespace Capstone.Controllers
                 OrganizationId = organizationId,
                 OrganizationDescription = organization.OrganizationDescription,
                 OrganizationName = organization.OrganizationName,
+                UserRole = role
             };
             if(categoryId != null)
             {

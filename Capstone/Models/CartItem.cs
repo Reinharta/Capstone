@@ -9,11 +9,12 @@ namespace Capstone.Models
 {
     public class CartItem
     {
+       
         [Key]
-        public string CartItemId { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("DonationBasket")]
-        public int BasektId { get; set; }
+        public int? BasketId { get; set; }
         public DonationBasket DonationBasket { get; set; }
 
         [ForeignKey("Supporter")]

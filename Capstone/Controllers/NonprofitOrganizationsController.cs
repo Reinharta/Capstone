@@ -56,23 +56,23 @@ namespace Capstone.Controllers
         // GET: NonprofitOrganizations
         public ActionResult Index(string searchString, string category)
         {
-            var nonprofitOrganizations = db.NonprofitOrganizations.Include(d => d.ShipAddress).Include(d => d.DropAddress);
+            var nonprofitOrganizations = db.NonprofitOrganizations.Include(d => d.ShipAddress).Include(d => d.DropAddress).Where(c => c.RegistrationCompleted == true);
 
             if (!String.IsNullOrEmpty(category) && !String.IsNullOrEmpty(searchString))
             {
                 int categoryId = Int32.Parse(category);
-                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.CategoryId == categoryId && c.DropAddress.Zipcode.Contains(searchString) || c.ShipAddress.Zipcode.Contains(searchString));
+                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.RegistrationCompleted == true).Where(c => c.CategoryId == categoryId && c.DropAddress.Zipcode.Contains(searchString) || c.ShipAddress.Zipcode.Contains(searchString));
             }
 
             if (!String.IsNullOrEmpty(category))
             {
                 int categoryId = Int32.Parse(category);
-                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.CategoryId == categoryId);
+                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.RegistrationCompleted == true).Where(c => c.CategoryId == categoryId);
             }
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                nonprofitOrganizations = nonprofitOrganizations.Where(s => s.DropAddress.Zipcode.Contains(searchString) || s.ShipAddress.Zipcode.Contains(searchString));                
+                nonprofitOrganizations = nonprofitOrganizations.Where(c => c.RegistrationCompleted == true).Where(s => s.DropAddress.Zipcode.Contains(searchString) || s.ShipAddress.Zipcode.Contains(searchString));                
             }
 
             ViewBag.Categories = db.OrganizationCategories.Distinct();

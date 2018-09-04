@@ -52,8 +52,7 @@
             @Html.DisplayFor(modelItem => item.BasketItems.Count)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BasketId }) |
-            @Html.ActionLink("Index", "Details", new { supporterId = item.SupporterId, organizationId = item.OrganizationId }) |
+            @Html.ActionLink("Details", "Index", new { supporterId = item.SupporterId, organizationId = item.OrganizationId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.BasketId })
         </td>
     </tr>
