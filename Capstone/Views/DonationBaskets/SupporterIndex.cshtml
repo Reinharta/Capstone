@@ -6,6 +6,10 @@
 }
 
 <h2>Active Donation Baskets</h2>
+<button type="button" class="btn btn-primary btn-sm" onclick="location.href ='@Url.Action("SupporterPastIndex", "DonationBaskets", new { id = Model.SupporterId })'">
+    View Past Donations
+</button>
+<br/>
 
 @{ int listCount = Model.BasketsList.Count();}
 @if ( listCount == 0)
@@ -33,7 +37,7 @@
 @foreach (var item in Model.BasketsList) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
+            @Html.DisplayFor(modelItem => item.DateCreated.Date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
@@ -52,8 +56,10 @@
             @Html.DisplayFor(modelItem => item.BasketItems.Count)
         </td>
         <td>
-            @Html.ActionLink("Details", "Index", new { supporterId = item.SupporterId, organizationId = item.OrganizationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BasketId })
+            <button type="button" class="btn btn-primary btn-sm" onclick="location.href = '@Url.Action("Index", new { supporterId = item.SupporterId, organizationId = item.OrganizationId })'">
+                Details
+            </button>
+            | @Html.ActionLink("Delete", "Delete", new { id = item.BasketId })
         </td>
     </tr>
 }

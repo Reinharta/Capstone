@@ -1,18 +1,25 @@
 ﻿@model Capstone.Models.DonationBasket
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Donation Basket</h2>
 <h3>@ViewBag.OrganizationName</h3>
+<br/>
+@if (Model.BasketPending == false && Model.Received == false)
+{
+    
+}
 
 <table class="table">
     <tr>
-        <th>
+        <th><button type="button" class="btn btn-primary btn-sm" onclick="location.href ='@Url.Action("PrintShoppingList", "DonationBasketPrinting", new { id = Model.BasketId })'">
+    Print Shopping List
+</button>
             Item Name
         </th>
         <th>
@@ -57,24 +64,21 @@
     }
 
 </table>
+<hr/>
 
-@if (Model.BasketPending == false && Model.Received == false)
+@if (User.IsInRole("Supporter") && Model.BasketPending == false && Model.Received == false)
 {
-    
-        @*<a href="@Url.Action("PrintShoppingList", "DonationBasketPrinting", new { id = Model.BasketId })">*@
-            <button type="button" class="btn btn-primary btn-lg" onclick="location.href ='@Url.Action("PrintShoppingList", "DonationBasketPrinting", new { id = Model.BasketId })'">
-                Print Shopping List
-            </button>
-        @*</a>*@
-        
-        
-        
-    
- }
+    <p>Once you have collected all of your donation items and you are ready to ship or drop them off, please let the Nonprofit Organization know to expect them by clicking the button below.</p>
+    <p>Your donations cannot be confirmed without this step!</p>
+    <button type="button" class="btn btn-warning btn-lg" onclick="location.href = '@Url.Action("MarkPending", "DonationBaskets", new { id = Model.BasketId})'">
+        It's On The Way!
+    </button>
+}
 
- @if (Model.BasketPending == true && Model.Received == false)
- {
-      <button type="button" class="btn btn-primary btn-lg">
-            @Html.ActionLink("Print Packing Slip", "PrintPackingSlip", "DonationBasketPrinting", new { id = Model.BasketId }, null)
-      </button>
-  }
+@if (User.IsInRole("Supporter") && Model.BasketPending == true && Model.Received == false)
+{
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href ='@Url.Action("PrintPackingSlip", "DonationBasketPrinting", new { id = Model.BasketId })'">
+            Print Packing Slip
+        </button>
+  
+}

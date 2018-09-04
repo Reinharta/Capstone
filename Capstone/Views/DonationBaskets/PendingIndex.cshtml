@@ -1,0 +1,32 @@
+﻿
+
+@{
+    ViewBag.Title = "PendingIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pending Donations</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Supporter Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in ViewBag.PendingList) {
+    <tr>
+        <td>
+            @item.Supporter.FullName
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Index", "DonationBaskets", new { supporterId = item.SupporterId, organizationId = item.OrganizationId }, null) |
+            <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("ConfirmReceipt", "DonationBaskets", new { id = item.BasketId })'">
+                Confirm Receipt
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

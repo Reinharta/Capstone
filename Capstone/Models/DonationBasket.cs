@@ -26,6 +26,7 @@ namespace Capstone.Models
         public bool BasketPending { get; set; }
 
         public bool Received { get; set; }
+        public DateTime ReceivedDate { get; set; }
 
         public List<CartItem> BasketItems { get; set; }
     }

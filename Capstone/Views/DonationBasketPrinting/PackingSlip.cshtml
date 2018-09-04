@@ -1,0 +1,83 @@
+﻿@model Capstone.ViewModels.PackingSlipViewModel
+
+@{
+    ViewBag.Title = "PackingSlip";
+    Layout = "~/Views/Shared/PrintLayout.cshtml";
+}
+
+<h2>Donation Packing Slip</h2>
+
+<p>
+    Donation From:<br/>
+    @Model.SupporterFullName<br />
+    @Model.SupporterEmail<br />
+    @Model.SupporterStreetAddress<br />
+    @Model.SupporterCityStateZip
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Item
+        </th>
+        <th>
+            Size
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Color
+        </th>
+        <th>
+            Quantity
+        </th>
+    </tr>
+
+@foreach (var item in Model.ItemsList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ItemSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td> 
+    </tr>
+}
+
+</table>
+
+<div class="col-md-12">
+    <p>
+        @Model.OrganizationName<br />
+        @String.Format("({0}) {1}-{2}"
+                 , Model.OrgPhone.Substring(0, 3)
+                 , Model.OrgPhone.Substring(3, 3)
+                 , Model.OrgPhone.Substring(6, Model.OrgPhone.Length - 6))<br />
+    </p>
+</div>
+    <div class="col-md-3">
+        <p>
+            Shipping Address:<br />
+            @Model.OrgShipContact<br />
+            @Model.OrgShipStreetAddress<br />
+            @Model.OrgShipCityStateZip
+        </p>
+    </div>
+    <div class="col-md-3">
+        <p>
+            Drop-Off Address:<br />
+            @Model.OrgDropContact<br />
+            @Model.OrgDropStreetAddress<br />
+            @Model.OrgDropCityStateZip
+        </p>
+    </div>

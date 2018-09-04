@@ -47,6 +47,37 @@ namespace Capstone.Controllers
             return View(viewModel);
         }
 
+        public ActionResult PendingIndex(int organizationId)
+        {
+            var organization = db.NonprofitOrganizations.Where(c => c.OrganizationId == organizationId).First();
+
+            List<DonationBasket> pendingDonations = db.DonationBaskets.Where(c => c.OrganizationId == organizationId && c.Received == false && c.BasketPending == true).ToList();
+            ViewBag.OrganizationName = organization.OrganizationName;
+            ViewBag.PendingList = pendingDonations;
+
+            return View();
+        }
+
+        public ActionResult SupporterPastIndex (int id, int? year)
+        {
+            var supporter = db.Supporters.Where(c => c.SupporterId == id).First();
+
+            SuppporterBasketIndexViewModel viewModel = new SuppporterBasketIndexViewModel()
+            {
+                SupporterId = id,
+                Supporter = supporter,
+                BasketsList = db.DonationBaskets.Include(d => d.Organization).Include(d => d.Supporter).Include(d => d.BasketItems).Where(c => c.SupporterId == id && c.Received == true).ToList()
+            };
+
+            //if (year != null || year != 0)
+            //{
+            //    viewModel.BasketsList = db.DonationBaskets.Include(d => d.Organization).Include(d => d.Supporter).Include(d => d.BasketItems).Where(c => c.SupporterId == id && c.Received == true && c.ReceivedDate.Year == year).ToList();
+            //}
+
+            //ViewBag.Years = 
+            return View(viewModel);
+        }
+
         public ActionResult AddToBasket(CartItem cartItem)
         {
             cartItem.Product = db.DonationItem.Where(c => c.ItemId == cartItem.ProductId).First();
@@ -88,20 +119,27 @@ namespace Capstone.Controllers
 
             return newBasket;
         }
-        // GET: DonationBaskets/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    DonationBasket donationBasket = db.DonationBaskets.Find(id);
-        //    if (donationBasket == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(donationBasket);
-        //}
+        
+        public ActionResult MarkPending (int id)
+        {
+            var basket = db.DonationBaskets.Where(c => c.BasketId == id).First();
+            basket.BasketPending = true;
+
+            db.Entry(basket).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("SupporterIndex");
+        }
+
+        public ActionResult ConfirmReceipt (int id)
+        {
+            var basket = db.DonationBaskets.Where(c => c.BasketId == id).First();
+            basket.Received = true;
+            var orgId = basket.OrganizationId;
+
+            db.Entry(basket).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("PendingIndex", new { organizationId = orgId });
+        }
 
         // GET: DonationBaskets/Create
         public ActionResult Create()

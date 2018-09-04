@@ -339,6 +339,10 @@
     <Compile Include="Migrations\201809040411317_id.Designer.cs">
       <DependentUpon>201809040411317_id.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809041930089_added rec%27v date to basket model.cs" />
+    <Compile Include="Migrations\201809041930089_added rec%27v date to basket model.Designer.cs">
+      <DependentUpon>201809041930089_added rec%27v date to basket model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -359,9 +363,11 @@
     <Compile Include="ViewModels\CreateSupporterViewModel.cs" />
     <Compile Include="ViewModels\DonationItemCreateViewModel.cs" />
     <Compile Include="ViewModels\FinishRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\OrganizationPendingIndexViewModel.cs" />
     <Compile Include="ViewModels\OrganizationProfileViewModel.cs" />
     <Compile Include="ViewModels\OrgDashboardViewModel.cs" />
     <Compile Include="ViewModels\OrgRequestItemsListViewModel.cs" />
+    <Compile Include="ViewModels\PackingSlipViewModel.cs" />
     <Compile Include="ViewModels\SuppporterBasketIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +478,9 @@
     <Content Include="Views\DonationBaskets\SupporterIndex.cshtml" />
     <Content Include="Views\DonationBasketPrinting\ShoppingList.cshtml" />
     <Content Include="Views\Shared\PrintLayout.cshtml" />
+    <Content Include="Views\DonationBaskets\PendingIndex.cshtml" />
+    <Content Include="Views\DonationBasketPrinting\PackingSlip.cshtml" />
+    <Content Include="Views\DonationBaskets\SupporterPastIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,6 +593,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809040411317_id.resx">
       <DependentUpon>201809040411317_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809041930089_added rec%27v date to basket model.resx">
+      <DependentUpon>201809041930089_added rec%27v date to basket model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

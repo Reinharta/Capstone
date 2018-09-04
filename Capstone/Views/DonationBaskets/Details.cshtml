@@ -6,7 +6,15 @@
 }
 
 <h2>Details</h2>
-
+<hr />
+@using (Html.BeginForm())
+{
+    <div>
+        Category: @Html.DropDownList("year", new SelectList(ViewBag.Years, "year", "Name"), " ", null)
+        <input type="submit" value="Search" class="btn-primary" />
+    </div>
+}
+<br />
 <div>
     <h4>DonationBasket</h4>
     <hr />

@@ -1,0 +1,53 @@
+﻿@model Capstone.ViewModels.SuppporterBasketIndexViewModel
+
+@{
+    ViewBag.Title = "SupporterPastIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Donation History</h2>
+<hr />
+@*@using (Html.BeginForm())
+{
+    <div>
+        Category: @Html.DropDownList("year", new SelectList(
+             new List<Object>
+                {
+                     new {value = 2016, text = "2016" },
+                     new {value = 2017, text = "2017" },
+                     new {value = 2018, text = "2018" }
+    })
+        <input type="submit" value="Search" class="btn-primary" />
+    </div>
+}
+<br />*@
+<table class="table">
+    <tr>
+        <th>
+            Date Confirmed
+        </th>
+        <th>
+            Organization
+        </th>
+        <th>
+            Items Count
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.BasketsList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceivedDate.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
+            </td>
+            <td>
+                @item.BasketItems.Count
+            </td>
+        </tr>
+    }
+
+</table>
